@@ -20,6 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->integer('sms_credits')->default(5);
             $table->boolean('is_admin')->default(false);
+            $table->string('api_key')->unique()->nullable();
             $table->timestamps();
         });
 

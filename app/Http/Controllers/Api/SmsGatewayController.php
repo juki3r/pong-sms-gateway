@@ -89,4 +89,44 @@ class SmsGatewayController extends Controller
 
         return response()->json(['message' => 'SMS queued', 'id' => $message->id]);
     }
+
+    //FOR API USERS
+    public function sendSmsAPI(Request $request)
+    {
+        $apiKey = $request->header('X-API-KEY');
+
+        if (!$apiKey) {
+            return response()->json(['error' => 'API key is required'], 401);
+        }
+
+        $user = \App\Models\User::where('api_key', $apiKey)->first();
+
+        if (!$user) {
+            return response()->json(['error' => 'Invalid API key'], 401);
+        }
+
+        $request->validate([
+            'phone_number' => 'required|string',
+            'message' => 'required|string|max:160',
+        ]);
+
+        if ($user->sms_credits <= 0) {
+            return response()->json(['error' => 'No SMS credits'], 403);
+        }
+
+        $message = \App\Models\Message::create([
+            'user_id' => $user->id,
+            'phone_number' => $request->phone_number,
+            'message' => $request->message,
+            'status' => 'pending',
+        ]);
+
+        $user->decrement('sms_credits');
+
+        return response()->json([
+            'message' => 'SMS queued',
+            'id' => $message->id
+        ]);
+    }
+
 }
