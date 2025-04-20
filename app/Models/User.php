@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'sms_credits',
         'is_admin',
+        'api_key',
     ];
 
     /**

@@ -36,11 +36,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $apiKey = $this->generateUniqueApiKey();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'api_key' => Str::random(40),
+            'api_key' => $apiKey,
         ]);
 
         event(new Registered($user));
@@ -48,5 +50,14 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+    protected function generateUniqueApiKey()
+    {
+        do {
+            $apiKey = Str::random(40); // Generate a random API key
+        } while (User::where('api_key', $apiKey)->exists()); // Check if it's unique
+
+        return $apiKey;
     }
 }
