@@ -3,7 +3,7 @@
         <div class="header">
             <div class="flex justify-between">
                 <h3 class="fs-3">
-                    Dashboard PONG
+                    Dashboard
                 </h3>
                 <div class="d-flex" style="font-size: 13px">
                     <div class="d-flex justify-center align-items-center border px-2 m-0">
