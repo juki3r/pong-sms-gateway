@@ -86,7 +86,7 @@
                             @enderror
                           
                             <div class="flex justify-end mt-4">
-                              <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded shadow hover:bg-red-700 disabled">Buy</button>
+                              <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded shadow hover:bg-red-700 hidden">Buy</button>
                             </div>
                           </form>
                           
