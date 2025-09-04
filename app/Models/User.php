@@ -24,6 +24,7 @@ class User extends Authenticatable
         'sms_credits',
         'is_admin',
         'api_key',
+        'role'
     ];
 
     /**
@@ -49,7 +50,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
 }
