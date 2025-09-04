@@ -1,26 +1,36 @@
 <div class=""> 
     <!-- Sidebar / Navbar -->
-    <nav class=" bg-black text-light  flex-column align-items-center  h-100 d-none d-lg-flex px-3">
+    <nav class=" flex align-items-center  h-100 d-none d-lg-flex px-3 shadow">
         <a href="{{ route('dashboard') }}" >
-            <img src="{{asset('logo.png')}}" alt="" style="width:120px;">
+            <img src="{{asset('logo.png')}}" alt="" style="width:100px;">
         </a>
-
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="my-2 text-light mt-5">
+        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="mx-3">
             {{ __('Dashboard') }}
         </x-nav-link>
-        <x-nav-link :href="route('send_sms')" :active="request()->routeIs('send_sms')" class="my-2 text-light">
+        <x-nav-link :href="route('send_sms')" :active="request()->routeIs('send_sms')" class="mx-3 ">
             {{ __('Send SMS') }}
         </x-nav-link>
-        <x-nav-link :href="route('credits')" :active="request()->routeIs('credits')" class="my-2 text-light">
+        <x-nav-link :href="route('credits')" :active="request()->routeIs('credits')" class="mx-3 ">
             {{ __('Credits') }}
         </x-nav-link>
     </nav>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary d-block d-lg-none">
-        <div class="container-fluid">
-            <a href="{{ route('dashboard') }}" >
-                <img src="{{asset('logo.png')}}" alt="logo" class="">
+
+    <!-- MOBILE/TABLET NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary d-lg-none w-100 border-b shadow">
+        <div class="container-fluid px-2">
+            <!-- Logo -->
+            <a href="{{ route('dashboard') }}" class="d-flex justify-content-center align-items-center">
+                <img src="{{ asset('logo.png') }}" alt="logo" width="200px">
+                <span class="mx-2 title_logo">PONG SMS Services</span>
             </a>
-            <button class="navbar-toggler custom-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+
+            <!-- Custom Toggler -->
+            <button class="navbar-toggler custom-toggler collapsed p-3" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mobileNavbar"
+                    aria-controls="mobileNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <div class="toggler-icon">
                     <span></span>
                     <span></span>
@@ -28,21 +38,26 @@
                 </div>
             </button>
 
-              
-          <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark text-center">
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="my-2">
-                    {{ __('Dashboard') }}
-                </x-nav-link>
-                <x-nav-link :href="route('send_sms')" :active="request()->routeIs('send_sms')" class="my-2">
-                    {{ __('Send SMS') }}
-                </x-nav-link>
-                <x-nav-link :href="route('credits')" :active="request()->routeIs('credits')" class="my-2">
-                    {{ __('Credits') }}
-                </x-nav-link>
-            </ul>
-
-          </div>
+            <!-- Collapsible Menu -->
+            <div class="collapse navbar-collapse text-end" id="mobileNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="my-3 me-5" id="mobile_nav">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </li>
+                    <li class="nav-item">
+                        <x-nav-link :href="route('send_sms')" :active="request()->routeIs('send_sms')" class="my-3 me-5" id="mobile_nav">
+                            {{ __('Send SMS') }}
+                        </x-nav-link>
+                    </li>
+                    <li class="nav-item">
+                        <x-nav-link :href="route('credits')" :active="request()->routeIs('credits')" class="my-3 me-5" id="mobile_nav">
+                            {{ __('Credits') }}
+                        </x-nav-link>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
     </div>

@@ -12,17 +12,23 @@ class DashboardController extends Controller
 {
 
 
-    public function dashboard() {
+    public function dashboard()
+    {
         $messages = Auth::user()->messages()->latest()->get();
         $current_credits = Auth::user()->sms_credits;
         $data = Message::paginate(5); // or any model
-        return view('dashboard', compact(['messages', 'current_credits','data' ]));
+        return view('dashboard', compact(['messages', 'current_credits', 'data']));
     }
 
-    public function sendSms(Request $request) {
+    public function sendSms(Request $request)
+    {
         $request->validate([
-            'recipient' => 'required|max:11|',
-            'message' => 'required|max:160',
+            'recipient' => [
+                'required',
+                'digits:11',          // eksaktong 11 digits
+                'regex:/^09\d{9}$/',  // dapat magsimula sa 09
+            ],
+            'message' => 'required|max:162',
         ]);
 
         $user = Auth::user();
@@ -42,7 +48,8 @@ class DashboardController extends Controller
         return redirect('dashboard')->with('status', 'New sms added please wait for update!');
     }
 
-    public function messagestatus() {
+    public function messagestatus()
+    {
         $messages = Message::orderBy('created_at', 'desc')->paginate(5); // 10 per page
 
         return response()->json([
@@ -51,29 +58,32 @@ class DashboardController extends Controller
             'last_page' => $messages->lastPage(),
         ]);
     }
-    
-    
 
-    public function adminLogs() {
+
+
+    public function adminLogs()
+    {
         $logs = \App\Models\Message::with('user')->latest()->get();
         $devices = \App\Models\Device::latest()->get();
         return view('admin.logs', compact('logs', 'devices'));
     }
 
-    public function creditPanel() {
+    public function creditPanel()
+    {
         $users = User::all();
         return view('admin.credits', compact('users'));
     }
-    
-    public function addCredits(Request $request) {
+
+    public function addCredits(Request $request)
+    {
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'credits' => 'required|integer|min:1'
         ]);
-    
+
         $user = User::find($request->user_id);
         $user->increment('sms_credits', $request->credits);
-    
+
         return back()->with('status', "Added {$request->credits} credits to {$user->name}!");
     }
 
@@ -108,7 +118,5 @@ class DashboardController extends Controller
         $creditUpdate = User::where('id', Auth::id())->update(['sms_credits' => $total_credits]);
 
         return redirect('dashboard');
-        
     }
-
 }
