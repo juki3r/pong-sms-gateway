@@ -56,6 +56,15 @@
                             {{ __('Credits') }}
                         </x-nav-link>
                     </li>
+                    <!-- Logout -->
+                    <li class="nav-item my-3 me-5">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger w-100">
+                                {{ __('Logout') }}
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
