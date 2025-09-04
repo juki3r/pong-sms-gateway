@@ -30,9 +30,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-
                     <div class="d-flex flex-column w-100 justify-start mt-3">
-                        <div class="slot">
                             <div class="row">
                                 {{-- SMS --}}
                                 <div class="col">
@@ -71,7 +69,7 @@
                                 </div>
                             </div>
             
-                            <div class="row py-2 m-0 mt-5">
+                            <div class="py-2 m-0 mt-5">
                                 @if(session('success'))
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                                 {{ session('success') }}
@@ -88,22 +86,26 @@
                                 
                             
                                 <div id="messageTable" class="mt-1">
-                                    <table class="table table-bordered" style="font-size: 12px;">
-                                        <thead>
-                                            <tr>
-                                                <th>RECIPIENT</th>
-                                                <th>MESSAGE</th>
-                                                <th>SMS LENGTH</th>
-                                                <th>STATUS</th>
-                                                <th>DATE</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="messagesBody">
-                                           
-                                        </tbody>
-                                    </table>
+                                    <!-- Responsive wrapper -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped align-middle" style="font-size: 12px;">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>RECIPIENT</th>
+                                                    <th>MESSAGE</th>
+                                                    <th>SMS LENGTH</th>
+                                                    <th>STATUS</th>
+                                                    <th>DATE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="messagesBody">
+                                                <!-- Data from fetch will load here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                     <nav id="pagination" class="mt-3"></nav>
-                                </div>      
+                                </div>     
                                 <script>
                                 let currentPage = 1;
                                 function fetchMessages(page = currentPage) {
@@ -164,8 +166,7 @@
                                     
                                 </script>
                             </div>
-            
-                        </div>
+
                         
                     </div>
                     
