@@ -30,7 +30,7 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 text-gray-900">
-  
+                      @if($current_credits  > 0)
                       <div class="card shadow rounded-2 p-4">
                           <div class="card-head mb-4">
                             <h3 class="fs-3 fw-bold">BUY MORE CREDITS</h3>
@@ -90,6 +90,13 @@
                               <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded shadow hover:bg-red-700 hidden">Buy</button>
                             </div>
                           </form>
+
+                          @else
+                        <p>
+                            You have 0 credit, please contact system admin to start subscription. Thank you! <br>
+
+                        </p>
+                        @endif
                           
                           <script>
                             function selectRow(row) {

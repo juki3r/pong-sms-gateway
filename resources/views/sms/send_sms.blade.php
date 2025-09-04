@@ -30,7 +30,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-    
+                        @if($current_credits  > 0)
                         <div class="">
                             <div class="card shadow rounded-4">
                                 <div class="card-body p-4">
@@ -89,6 +89,12 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <p>
+                            You have 0 credit, please contact system admin to start subscription. Thank you! <br>
+
+                        </p>
+                        @endif
                         
                         <!-- Live Character Count Script -->
                         <script>
