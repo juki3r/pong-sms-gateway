@@ -1,129 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pong SMS Gateway</title>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    @vite('resources/css/app.css')
-</head>
-<style>
-    body {
-        background-color: #f2f2f2;
-        height: 100vh;
-        width: 100vw;
-    }
-    /* Custom Hamburger Button */
-    .custom-toggler {
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-        background: transparent;
-        padding: 0.75rem;
-        cursor: pointer;
-    }
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    .custom-toggler:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    /* Hamburger container */
-    .toggler-icon {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 70px;   /* adjust size for balance */
-        height: 45px;  /* smaller for proportional look */
-        position: relative;
-    }
-
-    /* Hamburger lines */
-    .toggler-icon span {
-        height: 6px;
-        width: 100%;
-        background-color: #000;
-        border-radius: 2px;
-        transition: all 0.3s ease-in-out;
-        position: relative;
-    }
-
-    /* Animate into X */
-    .custom-toggler:not(.collapsed) .toggler-icon span:nth-child(1) {
-        transform: rotate(45deg);
-        position: absolute;
-        top: 12px;  /* move to center */
-        background-color: red;
-    }
-
-    .custom-toggler:not(.collapsed) .toggler-icon span:nth-child(2) {
-        opacity: 0; /* vanish */
-    }
-
-    .custom-toggler:not(.collapsed) .toggler-icon span:nth-child(3) {
-        transform: rotate(-45deg);
-        position: absolute;
-        top: 12px;  /* move to center */
-        background-color: red;
-    }
-
-    #mobile_nav{
-        font-size: 42px;
-    }
-
-    .header{
-        font-size: 42px;
-    }
-    #credits_top{
-        font-size: 22px;
-    }
-
-    @media screen and (min-width: 1040px) {
-        .header {
-            font-size: 22px;
-        }
-        #credits_top{
-            font-size: 13px;
-        }
-    }
-
-    .title_logo{
-        font-size: 46px;
-        font-weight: bold;
-    }
-</style>
-
-<body>
-
-    <div class="container-fluid-break w-100 h-100 d-flex flex-column">
-
-       <div class="">
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
-       </div>
 
-       <div class="main">
             <!-- Page Heading -->
             @isset($header)
-                <header class="p-4">
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
+                    </div>
                 </header>
             @endisset
 
-            {{ $slot }}
-       </div>
-
-       <div class="footer text-center m-auto mb-0">
-        &copy PONG-MTA&trade; - 2025
-
-       </div>
-
-
-
-    </div>
-
-  
-</body>
-
-
-
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
+</html>
