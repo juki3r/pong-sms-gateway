@@ -5,8 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard') }}" class="d-flex- justify-content-center">
                          <img src="{{ asset('logo.png') }}" alt="" width="60px">
+                         <strong class="fs-3">PONG SMS Services</strong>
                     </a>
                 </div>
 
