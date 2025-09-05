@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b shadow border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-2 py-2 sm:px-2 lg:px-8">
+    <div class="max-w-7xl mx-auto px-2 py-1 sm:px-2 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}" class="">
                          <img src="{{ asset('logo.png') }}" alt="" width="70px">
                     </a>
-                    <strong class="fs-5">PONG SMS Services</strong>
+                    <strong class="fs-6">PONG SMS Services</strong>
                 </div>
 
                 <!-- Navigation Links -->
