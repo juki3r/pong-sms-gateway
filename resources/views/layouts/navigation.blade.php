@@ -4,9 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="">
-                         <img src="{{ asset('logo.png') }}" alt="" width="60px">
+                         <img src="{{ asset('logo.png') }}" alt="" width="80px">
                     </a>
                     <strong class="fs-5">PONG SMS Services</strong>
                 </div>
