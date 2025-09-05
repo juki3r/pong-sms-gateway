@@ -4,11 +4,11 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="d-flex- justify-content-center">
+                <div class="shrink-0 flex items-center d-flex- justify-content-center">
+                    <a href="{{ route('dashboard') }}" class="">
                          <img src="{{ asset('logo.png') }}" alt="" width="60px">
-                         <strong class="fs-3">PONG SMS Services</strong>
                     </a>
+                    <strong class="fs-3">PONG SMS Services</strong>
                 </div>
 
                 <!-- Navigation Links -->
