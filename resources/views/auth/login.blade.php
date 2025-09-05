@@ -44,18 +44,18 @@
         </div>
 
         <!-- Links Row -->
-        <div class="flex items-center justify-between mt-4 text-sm">
+        <div class="mt-4 flex justify-between text-sm w-full">
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" 
                    class="text-gray-600 hover:text-gray-900">
-                    {{ __('Forgot your password?') }}
+                    {{ __('Forgot password?') }}
                 </a>
             @endif
 
             @if (Route::has('register'))
                 <a href="{{ route('register') }}" 
-                   class="text-indigo-600 hover:text-indigo-900">
-                    {{ __('Don’t have an account? Register') }}
+                   class="text-indigo-600 hover:text-indigo-900 font-medium">
+                    {{ __('Register') }}
                 </a>
             @endif
         </div>
