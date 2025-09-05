@@ -32,7 +32,7 @@
             </label>
         </div>
         <div class="mt-4">
-            <x-primary-button class="py-3">
+            <x-primary-button class="py-2 w-full">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
