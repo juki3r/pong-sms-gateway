@@ -43,18 +43,18 @@
             </x-primary-button>
         </div>
 
-        <!-- Links -->
-        <div class="mt-4 text-center space-y-2">
+        <!-- Links Row -->
+        <div class="flex items-center justify-between mt-4 text-sm">
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" 
-                   class="block text-sm text-gray-600 hover:text-gray-900">
+                   class="text-gray-600 hover:text-gray-900">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
 
             @if (Route::has('register'))
                 <a href="{{ route('register') }}" 
-                   class="block text-sm text-indigo-600 hover:text-indigo-900">
+                   class="text-indigo-600 hover:text-indigo-900">
                     {{ __('Don’t have an account? Register') }}
                 </a>
             @endif
