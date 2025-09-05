@@ -1,12 +1,12 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="" :status="session('status')" />
-        <h3 class="fs-3 text-center w-full">Login</h3>
+        <h3 class="fs-4 text-center w-full">Login</h3>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
-        <div class="mt-2">
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block  w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
