@@ -6,14 +6,14 @@
         @csrf
 
         <!-- Email Address -->
-        <div class="mt-4">
+        <div class="mt-2">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block  w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-2">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block  w-full"
@@ -25,7 +25,7 @@
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
+        <div class="block mt-3">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
