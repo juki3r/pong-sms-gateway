@@ -56,7 +56,7 @@
                     </div>
                     {{-- SMS HISTORY --}}
 
-                    <div class="row mt-5">
+                   <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -65,37 +65,33 @@
                                     <th>#</th>
                                     <th>To</th>
                                     <th>Message</th>
+                                    <th>Status</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>Hello, how are you?</td>
-                                    <td>2025-09-24</td>
-                                    <td>13:00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jane Smith</td>
-                                    <td>Meeting at 3 PM</td>
-                                    <td>2025-09-24</td>
-                                    <td>09:30</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Mark Lee</td>
-                                    <td>Lunch tomorrow?</td>
-                                    <td>2025-09-23</td>
-                                    <td>12:45</td>
-                                </tr>
+                                @foreach($messages as $index => $msg)
+                                    <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $msg->phone_number }}</td>
+                                    <td>{{ $msg->message }}</td>
+                                    <td>{{ $msg->status }}</td>
+                                    <td>{{ $msg->created_at->format('Y-m-d') }}</td>
+                                    <td>{{ $msg->created_at->format('H:i') }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
+
+                            {{-- Pagination links --}}
+                            <div class="d-flex justify-content-center">
+                                {{ $messages->links() }}
+                            </div>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>
