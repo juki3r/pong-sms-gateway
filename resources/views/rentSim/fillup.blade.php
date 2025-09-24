@@ -31,16 +31,6 @@
                             <input type="text" name="zip" class="form-control" required>
                         </div>
                     </div>
-                    {{-- Uploads --}}
-                    <h5 class="fw-bold mb-3 mt-4">📂 Upload Documents</h5>
-                    <div class="mb-3">
-                        <label>Valid ID</label>
-                        <input type="file" name="valid_id" class="form-control" accept="image/*,.pdf" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Selfie with ID</label>
-                        <input type="file" name="selfie_id" class="form-control" accept="image/*" required>
-                    </div>
 
                     {{-- Personal Info --}}
                     <h5 class="fw-bold mb-3 mt-4">👤 Personal Information</h5>
@@ -54,12 +44,19 @@
                             <input type="date" name="dob" class="form-control" required>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label>Mobile Number</label>
-                            <input type="text" name="mobile" class="form-control" required>
-                        </div>
+                    
+                    {{-- Uploads --}}
+                    <h5 class="fw-bold mb-3 mt-4">📂 Upload Documents</h5>
+                    <div class="mb-3">
+                        <label>Valid ID</label>
+                        <input type="file" name="valid_id" class="form-control" accept="image/*,.pdf" required>
                     </div>
+                    <div class="mb-3">
+                        <label>Selfie with ID</label>
+                        <input type="file" name="selfie_id" class="form-control" accept="image/*" required>
+                    </div>
+
+                    
 
                     {{-- Agreement --}}
                     <div class="form-check mb-4">
