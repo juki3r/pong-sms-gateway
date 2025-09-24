@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'PONG SMS Services') }}</title>
-        <link rel="icon" type="image/png" href="{{ asset('logo') }}">
+        <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
