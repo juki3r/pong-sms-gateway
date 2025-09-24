@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             @else
-                                <div class="border text-danger d-flex justify-content-center align-items-center gap-3 rounded p-3">
+                                <div class="border text-success d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                     <div class="col p-1">
                                         <p>
                                             Your SIM rental application has been submitted. Please wait for verification and check your email regularly.
