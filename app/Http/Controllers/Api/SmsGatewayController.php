@@ -29,7 +29,23 @@ class SmsGatewayController extends Controller
 
 
 
-    // ESP32 posts back status
+    // // ESP32 posts back status
+    // public function updateSmsStatus(Request $request)
+    // {
+    //     $request->validate([
+    //         'id' => 'required|integer|exists:messages,id',
+    //         'status' => 'required|in:sent,failed',
+    //         'response' => 'nullable|string',
+    //     ]);
+
+    //     $msg = Message::find($request->id);
+    //     $msg->status = $request->status;
+    //     $msg->response = $request->response ?? '';
+    //     $msg->save();
+
+    //     return response()->json(['message' => 'Status updated']);
+    // }
+
     public function updateSmsStatus(Request $request)
     {
         $request->validate([
@@ -39,12 +55,21 @@ class SmsGatewayController extends Controller
         ]);
 
         $msg = Message::find($request->id);
+        $user = $msg->user; // Assuming Message model has a 'user' relationship
+
+        // Update status and response
         $msg->status = $request->status;
         $msg->response = $request->response ?? '';
         $msg->save();
 
+        // Refund credit if failed
+        if ($request->status === 'failed') {
+            $user->increment('sms_credits');
+        }
+
         return response()->json(['message' => 'Status updated']);
     }
+
 
     // ESP32 pings this every 30s to stay online
     public function ping(Request $request)
@@ -128,5 +153,4 @@ class SmsGatewayController extends Controller
             'id' => $message->id
         ]);
     }
-
 }
