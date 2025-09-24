@@ -119,7 +119,7 @@
                                     </thead>
                                     <tbody>
                                         @forelse($messages as $index => $msg)
-                                            <tr id="msg-{{ $msg->id }}" class="{{ $msg->status == 'sent' ? 'bg-success' : 'bg-danger' }}">
+                                            <tr id="msg-{{ $msg->id }}" class="{{ $msg->status == 'sent' ? 'bg-success text-white' : 'bg-danger text-white' }}">
                                                 <td>{{ $messages->firstItem() + $index }}</td>
                                                 <td>{{ $msg->phone_number }}</td>
                                                 <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
@@ -137,6 +137,7 @@
                                             </tr>
                                         @endforelse
                                         </tbody>
+
                                 </table>
 
                                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
