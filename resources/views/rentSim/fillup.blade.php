@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Date of Birth</label>
-                                <input type="date" name="dob" class="form-control" placeholder="YYYY-MM-DD" required>
+                                <input type="text" name="dob" id="dob" class="form-control" placeholder="Select date" required>
                             </div>
                         </div>
 
@@ -155,6 +155,11 @@
                     this.value = "";
                 }
             });
+        });
+
+
+        flatpickr("#dob", {
+            dateFormat: "Y-m-d"
         });
     </script>
 </x-app-layout>
