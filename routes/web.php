@@ -14,6 +14,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/messages/status', [DashboardController::class, 'status'])->name('messages.status');
 });
 
 

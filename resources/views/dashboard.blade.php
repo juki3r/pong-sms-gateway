@@ -71,20 +71,40 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($messages as $index => $msg)
-                                    <tr>
-                                    <td>{{ $messages->firstItem() + $index }}</td>
-                                    <td>{{ $msg->phone_number }}</td>
-                                    <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
-                                        {{ $msg->message }}
-                                    </td>
-                                    <td>{{ $msg->status }}</td>
-                                    <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
-                                    <td>{{ $msg->updated_at->format('H:i') }}</td>
+                                    @foreach($messages as $index => $msg)
+                                    <tr id="msg-{{ $msg->id }}">
+                                        <td>{{ $messages->firstItem() + $index }}</td>
+                                        <td>{{ $msg->phone_number }}</td>
+                                        <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
+                                            {{ $msg->message }}
+                                        </td>
+                                        <td class="status">{{ $msg->status }}</td>
+                                        <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
+                                        <td>{{ $msg->updated_at->format('H:i') }}</td>
                                     </tr>
-                                @endforeach
-                                </tbody>
+                                    @endforeach
+                                    </tbody>
                             </table>
+
+                            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                            <script>
+                                function updateStatuses() {
+                                    axios.get('{{ route("messages.status") }}')
+                                        .then(response => {
+                                            response.data.forEach(msg => {
+                                                const row = document.getElementById('msg-' + msg.id);
+                                                if (row) {
+                                                    row.querySelector('.status').textContent = msg.status;
+                                                }
+                                            });
+                                        })
+                                        .catch(error => console.error(error));
+                                }
+
+                                // Poll every 1 second
+                                setInterval(updateStatuses, 1000);
+                            </script>
+
 
                             {{-- Pagination links --}}
                             <div class="d-flex justify-content-center">

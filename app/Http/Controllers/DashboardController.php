@@ -20,6 +20,15 @@ class DashboardController extends Controller
         return view('dashboard', compact(['messages', 'current_credits', 'data']));
     }
 
+    public function status()
+    {
+        // Only current user's messages
+        $messages = Auth::user()->messages()->select('id', 'status')->latest()->get();
+
+        return response()->json($messages);
+    }
+
+
     public function sendSms(Request $request)
     {
         $request->validate([
