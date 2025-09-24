@@ -238,29 +238,76 @@
                         </div>
                     </div>
 
-                    {{-- SEND SMS MODAL --}}
+                    {{-- Rent Sim MODAL --}}
                     <div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-                            <form action="{{ route('sendSms') }}" method="POST">
-                                @csrf
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="sendSmsModalLabel">Rent Sim Card</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
+                                <form action="{{ route('sendSms') }}" method="POST" id="rentSimForm">
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="rentModalLabel">Rent SIM Card</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
 
-                                <div class="modal-body">
-                               
-                                </div>
+                                    <div class="modal-body">
+                                        <h6 class="fw-bold mb-3">Important Reminders & Agreement</h6>
+                                        <ul class="list-group list-group-flush mb-3">
+                                            <li class="list-group-item">
+                                                <strong>SIM Ownership:</strong> The rented SIM card remains the property of the provider and must be returned upon request or termination of rental.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Personal Information:</strong> Valid ID is required for SIM registration as per Philippine law.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Credits and Usage:</strong> SMS credits are prepaid and non-transferable. Additional credits must be purchased if depleted.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Responsible Usage:</strong> SIM must not be used for illegal activities, spam, harassment, or any prohibited activity.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Network Liability:</strong> The provider is not responsible for delays, failed messages, or downtime due to technical or external issues.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>SIM Loss or Damage:</strong> Lost or damaged SIM may incur replacement fees. Notify the provider immediately if lost or stolen.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Return Policy:</strong> SIM must be returned upon ending the rental to avoid additional charges.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Payment Agreement:</strong> Renting requires full payment upfront. Late or non-payment may result in service suspension.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Compliance:</strong> By renting, you agree to comply with all Philippine telecommunications laws and provider policies.
+                                            </li>
+                                        </ul>
 
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-warning">Rent</button>
-                                </div>
-                            </form>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="agreeTerms">
+                                            <label class="form-check-label" for="agreeTerms">
+                                                I have read and agree to all terms and conditions.
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-warning" id="rentBtn" disabled>Rent</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const agreeCheckbox = document.getElementById('agreeTerms');
+                            const rentBtn = document.getElementById('rentBtn');
+
+                            agreeCheckbox.addEventListener('change', function () {
+                                rentBtn.disabled = !this.checked;
+                            });
+                        });
+                    </script>
 
 
 
