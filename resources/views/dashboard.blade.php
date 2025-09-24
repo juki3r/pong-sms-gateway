@@ -96,7 +96,7 @@
                     {{-- SMS HISTORY --}}
                   <div class="row mt-5">
                         <div class="responsive-table col-12">
-                            <h3 class="py-3 fs-6 d-flex justify-content-space">
+                            <h3 class="py-3 fs-6 d-flex justify-content-around">
                                 <span style="font-size: 16px; font-weight: 500">
                                     Messages history:
                                 </span>
