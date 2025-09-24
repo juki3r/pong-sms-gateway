@@ -59,7 +59,7 @@
                    <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead class="table-light">
                                 <tr>
                                     <th>#</th>
@@ -73,9 +73,11 @@
                                 <tbody>
                                 @foreach($messages as $index => $msg)
                                     <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $messages->firstItem() + $index }}</td>
                                     <td>{{ $msg->phone_number }}</td>
-                                    <td>{{ $msg->message }}</td>
+                                    <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
+                                        {{ $msg->message }}
+                                    </td>
                                     <td>{{ $msg->status }}</td>
                                     <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
                                     <td>{{ $msg->updated_at->format('H:i') }}</td>
@@ -91,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                 </div>
