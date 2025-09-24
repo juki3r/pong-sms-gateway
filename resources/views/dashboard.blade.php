@@ -79,7 +79,7 @@
                             </div>
                             @endif
                         </div>
-
+                        @if(Auth::isrent() == false)
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <div class="col-4">
@@ -99,6 +99,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
 
 
