@@ -134,7 +134,7 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard')->with(
             'status',
-            '✅ Your SIM rental application has been submitted. Please wait for verification and check your email regularly.'
+            'Your SIM rental application has been submitted. Please wait for verification and check your email regularly.'
         );
     }
 
