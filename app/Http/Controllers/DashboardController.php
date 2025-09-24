@@ -100,7 +100,7 @@ class DashboardController extends Controller
             'barangay' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'province' => 'required|string|max:255',
-            'zip' => 'nullable|digits:4', // exactly 4 digits
+            'zip' => 'nullable',
 
             'valid_id' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'selfie_id' => 'required|file|mimes:jpg,jpeg,png|max:2048',
