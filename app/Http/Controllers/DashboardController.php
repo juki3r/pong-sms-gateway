@@ -94,21 +94,19 @@ class DashboardController extends Controller
     {
         return view('rentSim.fillup');
     }
-    public function store(Request $request)
+    public function storeRentSimcard(Request $request)
     {
         $request->validate([
             'barangay' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'province' => 'required|string|max:255',
-            'zip' => 'required|string|max:10',
+            'zip' => 'required|digits:4', // exactly 4 digits
 
             'valid_id' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'selfie_id' => 'required|file|mimes:jpg,jpeg,png|max:2048',
 
             'full_name' => 'required|string|max:255',
             'dob' => 'required|date',
-            'email' => 'required|email',
-            'mobile' => 'required|string|max:20',
 
             'agreement' => 'accepted',
         ]);
@@ -119,23 +117,26 @@ class DashboardController extends Controller
         $validIdPath = $request->file('valid_id')->store('uploads/ids', 'public');
         $selfiePath = $request->file('selfie_id')->store('uploads/selfies', 'public');
 
-        // Store in DB 
+        // Update user record
         $user->update([
-            'barangay' => $request->barangay,
-            'city' => $request->city,
-            'province' => $request->province,
-            'zip' => $request->zip,
+            'barangay'   => $request->barangay,
+            'city'       => $request->city,
+            'province'   => $request->province,
+            'zip'        => $request->zip,
 
-            'valid_id' => $validIdPath,
-            'selfie_id' => $selfiePath,
+            'valid_id'   => $validIdPath,
+            'selfie_id'  => $selfiePath,
 
-            'full_name' => $request->full_name,
-            'dob' => $request->dob,
-
+            'full_name'  => $request->full_name,
+            'dob'        => $request->dob,
         ]);
 
-        return redirect()->route('dashboard')->with('status', 'Your SIM rental application has been submitted. Please wait for verification and check your email from time to time.');
+        return redirect()->route('dashboard')->with(
+            'status',
+            '✅ Your SIM rental application has been submitted. Please wait for verification and check your email regularly.'
+        );
     }
+
 
 
 
