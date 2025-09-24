@@ -3,30 +3,22 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight d-flex justify-content-between">
             {{ __('Rent Sim Card') }}
         </h2>
-        
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    @if(session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
 
+                    {{-- Alerts --}}
+                    @if(session('status'))
+                        <div class="alert alert-success">{{ session('status') }}</div>
                     @elseif(session('alert'))
-                        <div class="alert alert-danger">
-                            {{ session('alert') }}
-                        </div>
+                        <div class="alert alert-danger">{{ session('alert') }}</div>
                     @endif
 
-                    {{-- Recipient error --}}
-                    @if($errors->has('recipient'))
-                        <div class="alert alert-danger">{{ $errors->first('recipient') }}</div>
-                    @elseif($errors->has('message'))
-                        <div class="alert alert-danger">{{ $errors->first('message') }}</div>
-                    @elseif($errors->any())
+                    {{-- Validation Errors --}}
+                    @if($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
@@ -36,15 +28,14 @@
                         </div>
                     @endif
 
-                   <div>
-                        <h6 class="fw-bold mb-3">SIM Card Rental Requirements</h6>
-                        <p>Please carefully follow the steps below to complete your SIM card rental application:</p>
+                    <div>
+                        <h5 class="fw-bold mb-3">📌 SIM Card Rental Requirements</h5>
+                        <p class="mb-4">Please carefully follow the steps below to complete your SIM card rental application:</p>
 
-                        <ol class="mb-0">
-                            <li>
+                        <ol class="list-group list-group-numbered mb-4">
+                            <li class="list-group-item">
                                 <strong>Complete Address</strong>  
-                                Provide your full residential address, including:  
-                                <ul>
+                                <ul class="mt-2">
                                     <li>House/Unit Number & Street</li>
                                     <li>Barangay</li>
                                     <li>City/Municipality</li>
@@ -53,32 +44,31 @@
                                 </ul>
                             </li>
 
-                            <li>
+                            <li class="list-group-item">
                                 <strong>Valid Government-Issued ID</strong>  
-                                Upload a clear photo of one (1) valid ID such as: Passport, Driver’s License, UMID, PRC ID, Voter’s ID, SSS/GSIS, or any other accepted government-issued ID.  
-                                <br><span class="text-muted">Make sure all details (ID number, name, and photo) are visible.</span>
+                                <p class="mb-1 mt-2">Upload a clear photo of one (1) valid ID such as: Passport, Driver’s License, UMID, PRC ID, Voter’s ID, SSS/GSIS, or other accepted ID.</p>
+                                <small class="text-muted">All details (ID number, name, and photo) must be visible.</small>
                             </li>
 
-                            <li>
+                            <li class="list-group-item">
                                 <strong>Selfie with Your ID</strong>  
-                                Take a selfie holding the same valid ID beside your face.  
-                                <br><span class="text-muted">This is required for verification to confirm that the ID belongs to you.</span>
+                                <p class="mb-1 mt-2">Take a selfie holding the same valid ID beside your face.</p>
+                                <small class="text-muted">This is required to confirm the ID belongs to you.</small>
                             </li>
 
-                            <li>
+                            <li class="list-group-item">
                                 <strong>Personal Information</strong>  
-                                Ensure you provide:  
-                                <ul>
-                                    <li>Full Name (as written on your ID)</li>
+                                <ul class="mt-2">
+                                    <li>Full Name (as on ID)</li>
                                     <li>Date of Birth</li>
                                     <li>Active Email Address</li>
-                                    <li>Mobile Number (if available)</li>
+                                    <li>Mobile Number</li>
                                 </ul>
                             </li>
 
-                            <li>
+                            <li class="list-group-item">
                                 <strong>Agreement & Confirmation</strong>  
-                                You must agree to our rental terms, responsible usage policy, and compliance with the Philippine Data Privacy Act before we process your request.
+                                <p class="mb-0 mt-2">You must agree to our rental terms, responsible usage policy, and compliance with the Philippine Data Privacy Act.</p>
                             </li>
                         </ol>
 
@@ -87,6 +77,12 @@
                         </p>
                     </div>
 
+                    {{-- Next Button --}}
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{{ route('sim.upload') }}" class="btn btn-primary px-4">
+                            Next →
+                        </a>
+                    </div>
 
                 </div>
             </div>
