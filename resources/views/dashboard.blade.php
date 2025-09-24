@@ -96,10 +96,13 @@
                     {{-- SMS HISTORY --}}
                   <div class="row mt-5">
                         <div class="responsive-table col-12">
-                            <h3 class="py-3 fs-6">
+                            <h3 class="py-3 fs-6 d-flex justify-content-space">
                                 <span style="font-size: 16px; font-weight: 500">
                                     Messages history:
                                 </span>
+                                <a href="" class="btn btn-sm btn-danger p-2">
+                                    Delete All
+                                </a>
                             </h3>
                             <div class="table-responsive">
                             <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
