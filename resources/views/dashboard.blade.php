@@ -110,58 +110,64 @@
 
                             </h3>
                             <div class="table-responsive">
-                            <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
-                                <thead class="table-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>To</th>
-                                    <th>Message</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($messages as $index => $msg)
-                                    <tr id="msg-{{ $msg->id }}">
-                                        <td>{{ $messages->firstItem() + $index }}</td>
-                                        <td>{{ $msg->phone_number }}</td>
-                                        <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
-                                            {{ $msg->message }}
-                                        </td>
-                                        <td class="status">{{ $msg->status }}</td>
-                                        <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
-                                        <td>{{ $msg->updated_at->format('H:i') }}</td>
+                                <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>To</th>
+                                        <th>Message</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
                                     </tr>
-                                    @endforeach
-                                    </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($messages as $index => $msg)
+                                        <tr id="msg-{{ $msg->id }}">
+                                            <td>{{ $messages->firstItem() + $index }}</td>
+                                            <td>{{ $msg->phone_number }}</td>
+                                            <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
+                                                {{ $msg->message }}
+                                            </td>
+                                            <td class="status">{{ $msg->status }}</td>
+                                            <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
+                                            <td>{{ $msg->updated_at->format('H:i') }}</td>
+                                        </tr>
+                                          @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center text-muted">
+                                                    No messages found.
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                </table>
 
-                            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                            <script>
-                                function updateStatuses() {
-                                    axios.get('{{ route("messages.status") }}')
-                                        .then(response => {
-                                            response.data.forEach(msg => {
-                                                const row = document.getElementById('msg-' + msg.id);
-                                                if (row) {
-                                                    row.querySelector('.status').textContent = msg.status;
-                                                }
-                                            });
-                                        })
-                                        .catch(error => console.error(error));
-                                }
+                                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                                <script>
+                                    function updateStatuses() {
+                                        axios.get('{{ route("messages.status") }}')
+                                            .then(response => {
+                                                response.data.forEach(msg => {
+                                                    const row = document.getElementById('msg-' + msg.id);
+                                                    if (row) {
+                                                        row.querySelector('.status').textContent = msg.status;
+                                                    }
+                                                });
+                                            })
+                                            .catch(error => console.error(error));
+                                    }
 
-                                // Poll every 1 second
-                                setInterval(updateStatuses, 1000);
-                            </script>
+                                    // Poll every 1 second
+                                    setInterval(updateStatuses, 1000);
+                                </script>
 
 
-                            <div class="d-flex justify-content-center my-3">
-                                <div class="w-auto">
-                                    {{ $messages->links('pagination::bootstrap-5') }}
+                                <div class="d-flex justify-content-center my-3">
+                                    <div class="w-auto">
+                                        {{ $messages->links('pagination::bootstrap-5') }}
+                                    </div>
                                 </div>
-                            </div>
 
 
                             </div>
