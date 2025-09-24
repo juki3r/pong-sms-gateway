@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        // Run every minute
+        // This is the key: schedule your command every minute
         $schedule->command('messages:refund-failed')->everyMinute();
     }
 
