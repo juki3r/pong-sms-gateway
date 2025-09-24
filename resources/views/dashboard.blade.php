@@ -56,10 +56,10 @@
                     </div>
                     {{-- SMS HISTORY --}}
 
-                   <div class="row mt-5">
+                  <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-sm">
+                            <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
                                 <thead class="table-light">
                                 <tr>
                                     <th>#</th>
@@ -93,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
 
