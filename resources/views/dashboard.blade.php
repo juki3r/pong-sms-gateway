@@ -20,6 +20,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class=" overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    {{-- TOP --}}
                    <div class="row">
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
@@ -52,7 +53,49 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    {{-- SMS HISTORY --}}
+
+                    <div class="row">
+                        <div class="responsive-table col-12">
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>To</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>John Doe</td>
+                                    <td>Hello, how are you?</td>
+                                    <td>2025-09-24</td>
+                                    <td>13:00</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jane Smith</td>
+                                    <td>Meeting at 3 PM</td>
+                                    <td>2025-09-24</td>
+                                    <td>09:30</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Mark Lee</td>
+                                    <td>Lunch tomorrow?</td>
+                                    <td>2025-09-23</td>
+                                    <td>12:45</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
                         </div>
+                    </div>
 
                 </div>
             </div>
