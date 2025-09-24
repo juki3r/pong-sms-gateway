@@ -3,8 +3,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use Log;
 use App\Models\Message;
+use Illuminate\Console\Command;
 
 class RefundFailedMessages extends Command
 {
@@ -26,9 +27,12 @@ class RefundFailedMessages extends Command
                 $user->increment('sms_credits');
                 $msg->refunded = true;
                 $msg->save();
+
+                Log::info("Refunded message ID {$msg->id} for user {$user->id}");
             }
         }
 
         $this->info('Failed messages refunded successfully.');
+        \Log::info('Refund command run at ' . now());
     }
 }
