@@ -21,7 +21,7 @@ class RefundFailedMessages extends Command
             ->get();
 
         foreach ($failedMessages as $msg) {
-            $user = $msg->user;
+            $user = $msg->user_id;
             if ($user) {
                 $user->increment('sms_credits');
                 $msg->refunded = true;
