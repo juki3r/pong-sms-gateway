@@ -122,24 +122,24 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($messages as $index => $msg)
-                                        <tr id="msg-{{ $msg->id }}">
-                                            <td>{{ $messages->firstItem() + $index }}</td>
-                                            <td>{{ $msg->phone_number }}</td>
-                                            <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
-                                                {{ $msg->message }}
-                                            </td>
-                                            <td class="status">{{ $msg->status }}</td>
-                                            <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
-                                            <td>{{ $msg->updated_at->format('H:i') }}</td>
-                                        </tr>
-                                          @empty
+                                        @forelse($messages as $index => $msg)
+                                            <tr id="msg-{{ $msg->id }}">
+                                                <td>{{ $messages->firstItem() + $index }}</td>
+                                                <td>{{ $msg->phone_number }}</td>
+                                                <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
+                                                    {{ $msg->message }}
+                                                </td>
+                                                <td class="status">{{ $msg->status }}</td>
+                                                <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
+                                                <td>{{ $msg->updated_at->format('H:i') }}</td>
+                                            </tr>
+                                        @empty
                                             <tr>
                                                 <td colspan="6" class="text-center text-muted">
                                                     No messages found.
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforelse
                                         </tbody>
                                 </table>
 
