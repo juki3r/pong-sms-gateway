@@ -253,7 +253,7 @@
                                         <h6 class="fw-bold mb-3">Important Reminders & Agreement</h6>
                                         <ul class="list-group list-group-flush mb-3">
                                             <li class="list-group-item">
-                                                <strong>SIM Ownership:</strong> The rented SIM card remains the property of the provider and must be returned upon request or termination of rental.
+                                                <strong>SIM Ownership:</strong> The rented SIM card remains the property of the provider and must be terminated upon request or termination of rental.
                                             </li>
                                             <li class="list-group-item">
                                                 <strong>Personal Information:</strong> Valid ID is required for SIM registration as per Philippine law.
@@ -268,10 +268,7 @@
                                                 <strong>Network Liability:</strong> The provider is not responsible for delays, failed messages, or downtime due to technical or external issues.
                                             </li>
                                             <li class="list-group-item">
-                                                <strong>SIM Loss or Damage:</strong> Lost or damaged SIM may incur replacement fees. Notify the provider immediately if lost or stolen.
-                                            </li>
-                                            <li class="list-group-item">
-                                                <strong>Return Policy:</strong> SIM must be returned upon ending the rental to avoid additional charges.
+                                                <strong>Return Policy:</strong> SIM services must be terminated upon ending the rental to avoid additional charges.
                                             </li>
                                             <li class="list-group-item">
                                                 <strong>Payment Agreement:</strong> Renting requires full payment upfront. Late or non-payment may result in service suspension.
