@@ -35,8 +35,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">ZIP Code</label>
-                                <input type="text" name="zip" id="zip" class="form-control" pattern="\d{4}" maxlength="4" required readonly>
-                                <div class="form-text">Auto-filled 4-digit ZIP code</div>
+                                <input type="text" name="zip" class="form-control" pattern="\d{4}" maxlength="4" required>
+                                <div class="form-text">Must be a 4-digit ZIP code</div>
                             </div>
                         </div>
 
@@ -91,7 +91,6 @@
         const provinceSelect = document.getElementById("province");
         const citySelect = document.getElementById("city");
         const barangaySelect = document.getElementById("barangay");
-        const zipInput = document.getElementById("zip");
 
         // Load provinces
         fetch("https://psgc.gitlab.io/api/provinces.json")
@@ -109,7 +108,6 @@
             barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
             citySelect.disabled = true;
             barangaySelect.disabled = true;
-            zipInput.value = "";
 
             if (provinceSelect.value) {
                 fetch(`https://psgc.gitlab.io/api/provinces/${provinceSelect.value}/cities-municipalities.json`)
@@ -128,31 +126,16 @@
         citySelect.addEventListener("change", () => {
             barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
             barangaySelect.disabled = true;
-            zipInput.value = "";
 
             if (citySelect.value) {
                 fetch(`https://psgc.gitlab.io/api/cities-municipalities/${citySelect.value}/barangays.json`)
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(brgy => {
-                            let opt = new Option(brgy.name, brgy.code);
+                            let opt = new Option(brgy.name, brgy.name);
                             barangaySelect.add(opt);
                         });
                         barangaySelect.disabled = false;
-                    });
-            }
-        });
-
-        // On barangay change, fetch ZIP code
-        barangaySelect.addEventListener("change", () => {
-            zipInput.value = "";
-            if (barangaySelect.value) {
-                fetch(`https://psgc.gitlab.io/api/barangays/${barangaySelect.value}.json`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data && data.postal_code) {
-                            zipInput.value = data.postal_code;
-                        }
                     });
             }
         });
