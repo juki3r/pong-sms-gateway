@@ -14,30 +14,23 @@
                     {{-- Address --}}
                     <h5 class="fw-bold mb-3">🏠 Complete Address</h5>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label>House/Unit & Street</label>
-                            <input type="text" name="street" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Barangay</label>
                             <input type="text" name="barangay" class="form-control" required>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>City/Municipality</label>
                             <input type="text" name="city" class="form-control" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>Province</label>
                             <input type="text" name="province" class="form-control" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <label>ZIP Code</label>
                             <input type="text" name="zip" class="form-control" required>
                         </div>
                     </div>
-
                     {{-- Uploads --}}
                     <h5 class="fw-bold mb-3 mt-4">📂 Upload Documents</h5>
                     <div class="mb-3">
@@ -62,10 +55,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label>Email Address</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
                         <div class="col-md-6">
                             <label>Mobile Number</label>
                             <input type="text" name="mobile" class="form-control" required>
