@@ -24,7 +24,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'sms_credits',
         'is_admin',
         'api_key',
-        'role'
+        'role',
+        'barangay',
+        'city',
+        'province',
+        'zip',
+        'valid_id',
+        'selfie_id',
+        'full_name',
+        'dob',
     ];
 
     /**

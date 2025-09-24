@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/rent/simcard', [DashboardController::class, 'rentsimcard'])->name('rentSim');
     Route::get('/rent/simcard/upload', [DashboardController::class, 'uploadData'])->name('uploadData');
+    Route::post('/rent/store', [DashboardController::class, 'storeRentSimcard'])->name('sim.store');
 });
 
 

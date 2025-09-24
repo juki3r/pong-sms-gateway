@@ -7,6 +7,7 @@ use App\Models\Device;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -84,7 +85,7 @@ class DashboardController extends Controller
     }
 
 
-    //Rent Simacard
+    //Rent Simcard
     public function rentsimcard()
     {
         return view('rentSim.index');
@@ -92,6 +93,48 @@ class DashboardController extends Controller
     public function uploadData()
     {
         return view('rentSim.fillup');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'barangay' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'zip' => 'required|string|max:10',
+
+            'valid_id' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'selfie_id' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+
+            'full_name' => 'required|string|max:255',
+            'dob' => 'required|date',
+            'email' => 'required|email',
+            'mobile' => 'required|string|max:20',
+
+            'agreement' => 'accepted',
+        ]);
+
+        $user = Auth::user();
+
+        // Save uploads
+        $validIdPath = $request->file('valid_id')->store('uploads/ids', 'public');
+        $selfiePath = $request->file('selfie_id')->store('uploads/selfies', 'public');
+
+        // Store in DB 
+        $user->update([
+            'barangay' => $request->barangay,
+            'city' => $request->city,
+            'province' => $request->province,
+            'zip' => $request->zip,
+
+            'valid_id' => $validIdPath,
+            'selfie_id' => $selfiePath,
+
+            'full_name' => $request->full_name,
+            'dob' => $request->dob,
+
+        ]);
+
+        return redirect()->route('dashboard')->with('status', 'Your SIM rental application has been submitted. Please wait for verification and check your email from time to time.');
     }
 
 
