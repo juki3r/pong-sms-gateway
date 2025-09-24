@@ -25,7 +25,10 @@
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <div class="col-4">
-                                    <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100">
+                                    <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#sendSmsModal"
+                                    >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
                                         </svg>
@@ -54,8 +57,9 @@
                             </div>
                         </div>
                     </div>
-                    {{-- SMS HISTORY --}}
 
+
+                    {{-- SMS HISTORY --}}
                   <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <div class="table-responsive">
@@ -110,6 +114,44 @@
                             <div class="d-flex justify-content-center">
                                 {{ $messages->links() }}
                             </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- SEND SMS MODAL --}}
+                    <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <form action="{{ route('sendSms') }}" method="POST">
+                                @csrf
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="sendSmsModalLabel">Send SMS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="recipient" class="form-label">Recipient</label>
+                                    <input type="text" class="form-control" id="recipient" name="recipient" placeholder="09xxxxxxxxx" required>
+                                    @error('recipient')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="3" maxlength="162" required></textarea>
+                                    @error('message')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-warning">Send</button>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>
