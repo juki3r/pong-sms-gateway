@@ -75,6 +75,7 @@
                                     Not enough credits, Please rent sim card now to continue and unlocked more features.
                                 </p>
                             </div>
+                            @endif
                         </div>
 
                         <div class="col-12 col-md-6 p-2">
