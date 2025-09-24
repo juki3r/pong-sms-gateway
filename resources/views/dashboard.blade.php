@@ -23,7 +23,7 @@
                    <div class="row">
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-2 rounded p-3">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
@@ -39,13 +39,17 @@
 
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-2 rounded p-3">
-                            <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-database" viewBox="0 0 16 16">
-                                <path d="..."/>
-                                </svg>
-                                <span>Buy</span>
-                            </button>
-                            <p>Buy credit to continue privileges.</p>
+                                <div class="col-4">
+                                    <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-database" viewBox="0 0 16 16">
+                                        <path d="..."/>
+                                        </svg>
+                                        <span>Buy</span>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <p>Buy credit to continue privileges.</p>
+                                </div>
                             </div>
                         </div>
                         </div>
