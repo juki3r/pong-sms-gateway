@@ -129,7 +129,7 @@
                                     </thead>
                                     <tbody>
                                         @forelse($messages as $index => $msg)
-                                            <tr id="msg-{{ $msg->id }}" class="{{ $msg->status == 'sent' ? 'table-success' : 'table-danger' }}">
+                                            <tr id="msg-{{ $msg->id }}" >
                                                 <td>{{ $messages->firstItem() + $index }}</td>
                                                 <td>{{ $msg->phone_number }}</td>
                                                 <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
@@ -160,6 +160,21 @@
                                                     const row = document.getElementById('msg-' + msg.id);
                                                     if (row) {
                                                         row.querySelector('.status').textContent = msg.status;
+
+                                                        // Update row color
+                                                        if(msg.status === 'sent') {
+                                                            row.classList.remove('table-danger');
+                                                            row.classList.remove('table-warning');
+                                                            row.classList.add('table-success');
+                                                        } else if (msg.status === 'pending'){
+                                                            row.classList.remove('table-success');
+                                                            row.classList.remove('table-danger');
+                                                            row.classList.add('table-warning');
+                                                        }else {
+                                                            row.classList.remove('table-success');
+                                                            row.classList.remove('table-warning');
+                                                            row.classList.add('table-danger');
+                                                        }
                                                     }
                                                 });
                                             })
