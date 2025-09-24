@@ -77,8 +77,8 @@
                                     <td>{{ $msg->phone_number }}</td>
                                     <td>{{ $msg->message }}</td>
                                     <td>{{ $msg->status }}</td>
-                                    <td>{{ $msg->created_at->format('Y-m-d') }}</td>
-                                    <td>{{ $msg->created_at->format('H:i') }}</td>
+                                    <td>{{ $msg->updated_at->format('Y-m-d') }}</td>
+                                    <td>{{ $msg->updated_at->format('H:i') }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
