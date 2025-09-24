@@ -34,15 +34,9 @@
                     {{-- Recipient error --}}
                     @if($errors->has('recipient'))
                         <div class="alert alert-danger">{{ $errors->first('recipient') }}</div>
-                    @endif
-
-                    {{-- Message error --}}
-                    @if($errors->has('message'))
+                    @elseif($errors->has('message'))
                         <div class="alert alert-danger">{{ $errors->first('message') }}</div>
-                    @endif
-
-                    {{-- Or all errors at once --}}
-                    @if ($errors->any())
+                    @elseif($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
@@ -51,6 +45,7 @@
                             </ul>
                         </div>
                     @endif
+
 
 
 
