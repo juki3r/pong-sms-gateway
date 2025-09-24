@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}" class="">
                          <img src="{{ asset('logo.png') }}" alt="" width="70px">
                     </a>
-                    <strong class="fs-6">PONG SMS Services</strong>
+                    <strong class="fs-4">PONG SMS Services</strong>
                 </div>
 
                 <!-- Navigation Links -->
