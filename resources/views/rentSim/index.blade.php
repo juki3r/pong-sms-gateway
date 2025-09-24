@@ -79,7 +79,7 @@
 
                     {{-- Next Button --}}
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('sim.upload') }}" class="btn btn-primary px-4">
+                        <a href="" class="btn btn-primary px-4">
                             Next →
                         </a>
                     </div>
