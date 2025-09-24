@@ -129,6 +129,7 @@ class DashboardController extends Controller
 
             'full_name'  => $request->full_name,
             'dob'        => $request->dob,
+            'isrent'    => true,
         ]);
 
         return redirect()->route('dashboard')->with(
