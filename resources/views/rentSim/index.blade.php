@@ -79,7 +79,7 @@
 
                     {{-- Next Button --}}
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="" class="btn btn-primary px-4">
+                        <a href="{{ route('uploadData') }}" class="btn btn-primary px-4">
                             Next →
                         </a>
                     </div>

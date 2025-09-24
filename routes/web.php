@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('deleteSms');
 
     Route::get('/rent/simcard', [DashboardController::class, 'rentsimcard'])->name('rentSim');
+    Route::get('/rent/simcard/upload', [DashboardController::class, 'uploadData'])->name('uploadData');
 });
 
 

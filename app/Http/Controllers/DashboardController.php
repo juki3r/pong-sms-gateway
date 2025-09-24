@@ -89,6 +89,10 @@ class DashboardController extends Controller
     {
         return view('rentSim.index');
     }
+    public function uploadData()
+    {
+        return view('rentSim.fillup');
+    }
 
 
 
