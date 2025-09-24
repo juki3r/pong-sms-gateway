@@ -145,8 +145,11 @@
 
 
                             <div class="d-flex justify-content-center my-3">
-                                {{ $messages->links('pagination::bootstrap-5') }}
+                                <div class="w-auto">
+                                    {{ $messages->links('pagination::bootstrap-5') }}
+                                </div>
                             </div>
+
 
                             </div>
                         </div>
