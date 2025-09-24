@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Date of Birth</label>
-                                <input type="date" name="dob" class="form-control" required>
+                                <input type="date" name="dob" class="form-control" placeholder="YYYY-MM-DD" required>
                             </div>
                         </div>
 
