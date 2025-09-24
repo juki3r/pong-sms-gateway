@@ -52,7 +52,8 @@
                     {{-- TOP --}}
                    <div class="row mb-5">
                         <div class="col-12 col-md-6 p-2">
-                            <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
+                            @if($current_credits > 0)
+                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <div class="col-4">
                                     <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100"
                                         data-bs-toggle="modal" 
@@ -67,6 +68,12 @@
                                 <div class="col">
                                     <p>Send text message using our online tools.</p>
                                 </div>
+                            </div>
+                            @else
+                            <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
+                                <p>
+                                    Not enough credits, Please rent sim card now to continue and unlocked more features.
+                                </p>
                             </div>
                         </div>
 
@@ -206,17 +213,6 @@
                                 <button type="submit" class="btn btn-warning">Send</button>
                                 </div>
                             </form>
-
-                            <script>
-                                document.getElementById('sendSmsForm').addEventListener('submit', function(e){
-                                    var credits = {{ $current_credits }};
-                                    if(credits <= 0){
-                                        e.preventDefault();
-                                        alert('Not enough credits, Rent sim card now to continue!');
-                                    }
-                                });
-
-                            </script>
                             </div>
                         </div>
                     </div>
