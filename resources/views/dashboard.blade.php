@@ -25,9 +25,9 @@
                             {{ session('status') }}
                         </div>
 
-                    @elseif(session('error'))
+                    @elseif(session('alert'))
                         <div class="alert alert-danger">
-                            {{ session('error') }}
+                            {{ session('alert') }}
                         </div>
                     @endif
 

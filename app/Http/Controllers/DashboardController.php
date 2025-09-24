@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->sms_credits <= 0) {
-            return back()->with('error', 'Not enough credits, Buy credit to continue!');
+            return redirect('dashboard')->with('alert', 'Not enough credits, Buy credit to continue!');
         }
 
         $user->messages()->create([
