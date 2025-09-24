@@ -97,7 +97,9 @@
                   <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <h3 class="py-3 fs-6">
-                                Messages history:
+                                <span style="font-size: 16px; font-weight: 500">
+                                    Messages history:
+                                </span>
                             </h3>
                             <div class="table-responsive">
                             <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
