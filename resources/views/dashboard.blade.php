@@ -79,8 +79,9 @@
                             </div>
                             @endif
                         </div>
-                        @if($isrent == false)
+                        
                         <div class="col-12 col-md-6 p-2">
+                            @if($isrent == false)
                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <div class="col-4">
                                     <button class="d-flex shadow justify-content-center align-items-center gap-1 bg-warning border rounded p-3 w-100 h-100"
@@ -98,17 +99,17 @@
                                     <p>Rent sim card now to continue privileges.</p>
                                 </div>
                             </div>
-                        
-                        @else
-                            <div class="border text-success d-flex justify-content-center align-items-center gap-3 rounded p-3">
-                                <div class="col p-1">
-                                    <p>
-                                        Your SIM rental application has been submitted. Please wait for verification and check your email regularly.
-                                    </p>
+                            @else
+                                <div class="border text-danger d-flex justify-content-center align-items-center gap-3 rounded p-3">
+                                    <div class="col p-1">
+                                        <p>
+                                            Your SIM rental application has been submitted. Please wait for verification and check your email regularly.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
                         </div>
+                        
                     </div>
 
 
