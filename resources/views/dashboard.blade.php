@@ -100,7 +100,7 @@
                                 <span style="font-size: 16px; font-weight: 500">
                                     Messages history:
                                 </span>
-                                <a href="" class="btn btn-sm btn-danger p-1">
+                                <a href="" class="btn btn-sm btn-danger p-1" style="font-size: 12px">
                                     Delete All
                                 </a>
                             </h3>
