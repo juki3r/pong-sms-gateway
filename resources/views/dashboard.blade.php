@@ -100,7 +100,7 @@
                                 <span style="font-size: 16px; font-weight: 500">
                                     Messages history:
                                 </span>
-                                <form action="{{ route('deleteSms') }}" method="POST" class="d-inline">
+                                <form action="{{ route('deleteSms', ['user_id' => $user->id]) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger p-1" style="font-size: 12px">
