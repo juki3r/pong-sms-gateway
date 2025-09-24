@@ -12,10 +12,11 @@ class Message extends Model
         'message',
         'status',
         'response',
+        'refunded',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    
 }
