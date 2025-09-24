@@ -8,6 +8,8 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\RentSimAcknowledgmentMail;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -132,6 +134,9 @@ class DashboardController extends Controller
             'dob'        => $request->dob,
             'isrent'    => true,
         ]);
+
+        // Send acknowledgment email
+        Mail::to($user->email)->send(new RentSimAcknowledgmentMail($user));
 
         return redirect()->route('dashboard')->with(
             'status',
