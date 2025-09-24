@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('sms_credits')->default(5);
+            $table->integer('sms_credits')->default(3);
             $table->boolean('is_admin')->default(false);
             $table->string('api_key', 40)->nullable();
             $table->timestamps();
