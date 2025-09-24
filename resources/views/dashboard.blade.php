@@ -189,7 +189,7 @@
                                 <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="recipient" class="form-label">Recipient</label>
-                                    <input type="number" class="form-control" id="recipient" name="recipient" placeholder="09xxxxxxxxx" required>
+                                    <input type="number" class="form-control" id="recipient" name="recipient" maxlength="11" placeholder="09xxxxxxxxx" required>
                                     @error('recipient')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
