@@ -206,6 +206,17 @@
                                 <button type="submit" class="btn btn-warning">Send</button>
                                 </div>
                             </form>
+
+                            <script>
+                                document.getElementById('sendSmsForm').addEventListener('submit', function(e){
+                                    var credits = {{ $current_credits }};
+                                    if(credits <= 0){
+                                        e.preventDefault();
+                                        alert('Not enough credits, Rent sim card now to continue!');
+                                    }
+                                });
+
+                            </script>
                             </div>
                         </div>
                     </div>
