@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             @else
-                            <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-4">
+                            <div class="text-danger d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <p>
                                     Not enough credits, Please rent sim card now to continue and unlocked more features.
                                 </p>
