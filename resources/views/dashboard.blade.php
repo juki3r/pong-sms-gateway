@@ -21,7 +21,7 @@
             <div class=" overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{-- TOP --}}
-                   <div class="row">
+                   <div class="row mb-5">
                         <div class="col-12 col-md-6 p-2">
                             <div class="border d-flex justify-content-center align-items-center gap-3 rounded p-3">
                                 <div class="col-4">
@@ -56,7 +56,7 @@
                     </div>
                     {{-- SMS HISTORY --}}
 
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <div class="table-responsive">
                             <table class="table table-bordered table-hover">
