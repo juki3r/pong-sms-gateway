@@ -92,16 +92,19 @@
         const citySelect = document.getElementById("city");
         const barangaySelect = document.getElementById("barangay");
 
+
         // Load provinces
         fetch("https://psgc.gitlab.io/api/provinces.json")
             .then(res => res.json())
             .then(data => {
+                // Sort alphabetically by province name
+                data.sort((a, b) => a.name.localeCompare(b.name));
+
                 data.forEach(province => {
                     let opt = new Option(province.name, province.code);
                     provinceSelect.add(opt);
                 });
             });
-
         // On province change, load cities/municipalities
         provinceSelect.addEventListener("change", () => {
             citySelect.innerHTML = '<option value="">Select City/Municipality</option>';
