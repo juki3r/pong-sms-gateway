@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">ZIP Code</label>
-                                <input type="text" name="zip" class="form-control" pattern="\d{4}" maxlength="4" required>
+                                <input type="text" name="zip" class="form-control" pattern="\d{4}" maxlength="4" >
                                 <div class="form-text">Must be a 4-digit ZIP code</div>
                             </div>
                         </div>
