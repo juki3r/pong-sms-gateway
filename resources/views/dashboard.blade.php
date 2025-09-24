@@ -119,7 +119,7 @@
                                     </thead>
                                     <tbody>
                                         @forelse($messages as $index => $msg)
-                                            <tr id="msg-{{ $msg->id }}">
+                                            <tr id="msg-{{ $msg->id }}" class="{{ $msg->status == 'sent' ? 'bg-success' : 'bg-danger' }}">
                                                 <td>{{ $messages->firstItem() + $index }}</td>
                                                 <td>{{ $msg->phone_number }}</td>
                                                 <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
