@@ -16,25 +16,18 @@ class RefundFailedMessages extends Command
 
     public function handle()
     {
-        Message::where('status', 'failed')
+        $failedMessages = Message::where('status', 'failed')
             ->where('refunded', false)
-            ->each(function ($msg) {
-                $user = $msg->user;
-                if ($user) {
-                    $user->increment('sms_credits');
-                    $msg->update(['refunded' => true]);
-                }
-            });
+            ->get();
 
-
-        // foreach ($failedMessages as $msg) {
-        //     $user = $msg->user;
-        //     if ($user) {
-        //         $user->increment('sms_credits');
-        //         $msg->refunded = true;
-        //         $msg->save();
-        //     }
-        // }
+        foreach ($failedMessages as $msg) {
+            $user = $msg->user;
+            if ($user) {
+                $user->increment('sms_credits');
+                $msg->refunded = true;
+                $msg->save();
+            }
+        }
 
         $this->info('Failed messages refunded successfully.');
     }
