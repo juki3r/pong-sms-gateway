@@ -15,17 +15,23 @@
                         {{-- Address --}}
                         <h5 class="fw-bold mb-3">🏠 Complete Address</h5>
                         <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label class="form-label">Barangay</label>
-                                <input type="text" name="barangay" class="form-control" required>
+                            <div class="col-md-3">
+                                <label class="form-label">Province</label>
+                                <select name="province" id="province" class="form-select" required>
+                                    <option value="">Select Province</option>
+                                </select>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">City/Municipality</label>
-                                <input type="text" name="city" class="form-control" required>
+                                <select name="city" id="city" class="form-select" required disabled>
+                                    <option value="">Select City/Municipality</option>
+                                </select>
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Province</label>
-                                <input type="text" name="province" class="form-control" required>
+                            <div class="col-md-4">
+                                <label class="form-label">Barangay</label>
+                                <select name="barangay" id="barangay" class="form-select" required disabled>
+                                    <option value="">Select Barangay</option>
+                                </select>
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">ZIP Code</label>
@@ -80,8 +86,60 @@
         </div>
     </div>
 
-    {{-- Script for validation --}}
+    {{-- Script for PSGC + validation --}}
     <script>
+        const provinceSelect = document.getElementById("province");
+        const citySelect = document.getElementById("city");
+        const barangaySelect = document.getElementById("barangay");
+
+        // Load provinces
+        fetch("https://psgc.gitlab.io/api/provinces.json")
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(province => {
+                    let opt = new Option(province.name, province.code);
+                    provinceSelect.add(opt);
+                });
+            });
+
+        // On province change, load cities/municipalities
+        provinceSelect.addEventListener("change", () => {
+            citySelect.innerHTML = '<option value="">Select City/Municipality</option>';
+            barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+            citySelect.disabled = true;
+            barangaySelect.disabled = true;
+
+            if (provinceSelect.value) {
+                fetch(`https://psgc.gitlab.io/api/provinces/${provinceSelect.value}/cities-municipalities.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(city => {
+                            let opt = new Option(city.name, city.code);
+                            citySelect.add(opt);
+                        });
+                        citySelect.disabled = false;
+                    });
+            }
+        });
+
+        // On city change, load barangays
+        citySelect.addEventListener("change", () => {
+            barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+            barangaySelect.disabled = true;
+
+            if (citySelect.value) {
+                fetch(`https://psgc.gitlab.io/api/cities-municipalities/${citySelect.value}/barangays.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(brgy => {
+                            let opt = new Option(brgy.name, brgy.name);
+                            barangaySelect.add(opt);
+                        });
+                        barangaySelect.disabled = false;
+                    });
+            }
+        });
+
         // Disable/enable submit based on agreement checkbox
         document.getElementById('agreement').addEventListener('change', function () {
             document.getElementById('submitBtn').disabled = !this.checked;
