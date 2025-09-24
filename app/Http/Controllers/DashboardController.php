@@ -84,6 +84,13 @@ class DashboardController extends Controller
     }
 
 
+    //Rent Simacard
+    public function rentsimcard()
+    {
+        return "hello";
+    }
+
+
 
 
 

@@ -21,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/sms/delete/{user_id}', [DashboardController::class, 'deleteAll'])
         ->name('deleteSms');
+
+    Route::get('/rent/simcard', [DashboardController::class, 'rentsimcard'])->name('rentSim');
 });
 
 

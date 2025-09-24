@@ -242,7 +242,7 @@
                     <div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-                                <form action="{{ route('sendSms') }}" method="POST" id="rentSimForm">
+                                <form action="{{ route('rentSim') }}" method="GET" id="rentSimForm">
                                     @csrf
                                     <div class="modal-header">
                                         <h5 class="modal-title fs-5 fw-bold"  id="rentModalLabel" >Rent SIM Card</h5>
