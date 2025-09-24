@@ -18,6 +18,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/messages/status', [DashboardController::class, 'status'])->name('messages.status');
 
     Route::post('/send/message', [DashboardController::class, 'sendSms'])->name('sendSms');
+
+    Route::delete('/sms/delete/{user_id}', [DashboardController::class, 'deleteAll'])
+        ->name('deleteSms');
 });
 
 

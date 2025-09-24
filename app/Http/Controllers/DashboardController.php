@@ -68,6 +68,29 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function deleteAll($user_id)
+    {
+        // Find the user
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        // Delete all messages that belong to this user
+        Message::where('user_id', $user->id)->delete();
+
+        return redirect('dashboard')->with('status', 'All messages are deleted!');
+    }
+
+
+
+
+
+
+
+
+
 
 
     public function adminLogs()

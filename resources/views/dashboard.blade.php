@@ -100,9 +100,14 @@
                                 <span style="font-size: 16px; font-weight: 500">
                                     Messages history:
                                 </span>
-                                <a href="" class="btn btn-sm btn-danger p-1" style="font-size: 12px">
-                                    Delete All
-                                </a>
+                                <form action="{{ route('deleteSms') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger p-1" style="font-size: 12px">
+                                        Delete All
+                                    </button>
+                                </form>
+
                             </h3>
                             <div class="table-responsive">
                             <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
