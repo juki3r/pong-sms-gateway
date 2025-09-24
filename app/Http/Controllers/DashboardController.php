@@ -87,8 +87,7 @@ class DashboardController extends Controller
     //Rent Simacard
     public function rentsimcard()
     {
-        $current_credits = Auth::user()->sms_credits;
-        return view('rentSim.index', compact('current_credits'));
+        return view('rentSim.index');
     }
 
 
