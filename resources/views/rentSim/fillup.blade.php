@@ -29,7 +29,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">ZIP Code</label>
-                                <input type="text" name="zip" class="form-control" required>
+                                <input type="text" name="zip" class="form-control" pattern="\d{4}" maxlength="4" required>
+                                <div class="form-text">Must be a 4-digit ZIP code</div>
                             </div>
                         </div>
 
@@ -56,7 +57,7 @@
                         <div class="mb-3">
                             <label class="form-label">Selfie with ID</label>
                             <input type="file" name="selfie_id" class="form-control" accept="image/*" required>
-                            <div class="form-text">Make sure your face and ID are clearly visible</div>
+                            <div class="form-text">Make sure your face and ID are clearly visible (max 2MB)</div>
                         </div>
 
                         {{-- Agreement --}}
@@ -69,7 +70,7 @@
 
                         {{-- Submit --}}
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary px-4">
+                            <button type="submit" id="submitBtn" class="btn btn-primary px-4" disabled>
                                 <i class="bi bi-check-circle me-1"></i> Submit
                             </button>
                         </div>
@@ -78,4 +79,22 @@
             </div>
         </div>
     </div>
+
+    {{-- Script for validation --}}
+    <script>
+        // Disable/enable submit based on agreement checkbox
+        document.getElementById('agreement').addEventListener('change', function () {
+            document.getElementById('submitBtn').disabled = !this.checked;
+        });
+
+        // File size validation (2MB max)
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function () {
+                if (this.files[0] && this.files[0].size > 2 * 1024 * 1024) {
+                    alert("File size must be less than 2MB.");
+                    this.value = "";
+                }
+            });
+        });
+    </script>
 </x-app-layout>
