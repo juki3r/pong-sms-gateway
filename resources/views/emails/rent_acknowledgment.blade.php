@@ -12,6 +12,6 @@
 
     <br>
     <p>Thank you,</p>
-    <p><strong>Your Company Name</strong></p>
+    <p><strong>Pong SMS Services</strong></p>
 </body>
 </html>
