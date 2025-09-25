@@ -24,7 +24,8 @@ class FirmwareController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json(['version' => $device->firmware_version]);
+        return response($device->firmware_version, 200)
+            ->header('Content-Type', 'text/plain');
     }
 
 
