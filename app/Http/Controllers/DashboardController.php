@@ -54,6 +54,7 @@ class DashboardController extends Controller
             'phone_number' => $request->recipient,
             'message' => $request->message,
             'status' => 'pending',
+            'demo'  => false,
         ]);
 
         $user->decrement('sms_credits');
