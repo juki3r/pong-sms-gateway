@@ -62,11 +62,11 @@ class SmsGatewayController extends Controller
 
 
     // ESP32 fetches the oldest pending message. This is for Client
-    public function fetchSmsClient($id)
+    public function fetchSmsClient($user_id)
     {
         $message = Message::where('status', 'pending')
             ->where('demo', false)
-            ->where('user_id', $id)
+            ->where('user_id', $user_id)
             ->orderBy('created_at')
             ->first();
 
@@ -75,7 +75,8 @@ class SmsGatewayController extends Controller
         }
 
         return response()->json([
-            'id' => $message->user_id,
+            'id' => $message->id,
+            'user_id' => $message->user_id,
             'phone_number' => $message->phone_number,
             'message' => $message->message
         ]);
@@ -85,11 +86,13 @@ class SmsGatewayController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:messages,id',
+            'user_id' => 'required|integer',
             'status' => 'required|in:sent,failed',
             'response' => 'nullable|string',
         ]);
 
-        $msg = Message::where('user_id', $request->id)
+        $msg = Message::where('id', $request->id)
+            ->where('user_id', $request->user_id)
             ->where('demo', false)
             ->firstOrFail();
 

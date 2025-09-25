@@ -16,7 +16,7 @@ Route::get('/fetch-sms', [SmsGatewayController::class, 'fetchSms']);
 Route::post('/update-sms-status', [SmsGatewayController::class, 'updateSmsStatus']);
 
 //Client
-Route::get('/fetch-sms/client/{id}', [SmsGatewayController::class, 'fetchSmsClient']);
+Route::get('/fetch-sms/client/{user_id}', [SmsGatewayController::class, 'fetchSmsClient']);
 Route::post('/update-sms-status/client', [SmsGatewayController::class, 'updateSmsStatusClient']);
 
 
