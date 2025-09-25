@@ -160,40 +160,42 @@ class DashboardController extends Controller
 
     public function storeFirmware(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'firmware_version' => 'required|string|max:50',
-            'ota_key' => 'required|string|max:100',
-            'file_path' => 'required|file', // required
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|string|max:255',
+        //     'firmware_version' => 'required|string|max:50',
+        //     'ota_key' => 'required|string|max:100',
+        //     'file_path' => 'required|file', // required
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
+        return $request->file_path;
 
-        $file = $request->file('file_path');
-        $extension = strtolower($file->getClientOriginalExtension());
-        if (!in_array($extension, ['bin', 'hex'])) {
-            return response()->json([
-                'status' => 'error',
-                'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
-            ], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'errors' => $validator->errors()
+        //     ], 422);
+        // }
 
-        // Use Laravel's store method (public disk)
-        $filePath = $file->store('uploads/firmwares', 'public');
+        // $file = $request->file('file_path');
+        // $extension = strtolower($file->getClientOriginalExtension());
+        // if (!in_array($extension, ['bin', 'hex'])) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
+        //     ], 422);
+        // }
 
-        Espdevice::create([
-            'name' => $request->name,
-            'firmware_version' => $request->firmware_version,
-            'ota_key' => $request->ota_key,
-            'file_path' => $filePath,
-        ]);
+        // // Use Laravel's store method (public disk)
+        // $filePath = $file->store('uploads/firmwares', 'public');
 
-        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
+        // Espdevice::create([
+        //     'name' => $request->name,
+        //     'firmware_version' => $request->firmware_version,
+        //     'ota_key' => $request->ota_key,
+        //     'file_path' => $filePath,
+        // ]);
+
+        // return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
     }
 
 
