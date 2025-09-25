@@ -165,7 +165,7 @@ class DashboardController extends Controller
         ]);
 
         // Upload firmware file
-        $filePath = $request->file('file_path')->store('firmwares', 'public');
+        $filePath = $request->file('file_path')->store('uploads/firmwares', 'public');
 
         Espdevice::create([
             'name' => $request->name,
