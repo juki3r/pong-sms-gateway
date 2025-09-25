@@ -12,6 +12,14 @@
                 <div class="p-6 text-gray-900">
 
                     <div class="table-responsive">
+                        <div class="d-flex justify-content-between mb-4">
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Firmwares') }}</h2>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFirmwareModal">
+                                Add Firmware
+                            </button>
+                        </div>
+
+
                         <table class="table table-bordered table-hover">
                             <thead class="table-light">
                                 <tr>
@@ -53,5 +61,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Add Firmware Modal -->
+    <div class="modal fade" id="addFirmwareModal" tabindex="-1" aria-labelledby="addFirmwareModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('firmwares.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addFirmwareModalLabel">Add Firmware</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger mb-2">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Firmware Version</label>
+                            <input type="text" name="firmware_version" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">OTA Key</label>
+                            <input type="text" name="ota_key" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Firmware File</label>
+                            <input type="file" name="file_path" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Firmware</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>
 @endif

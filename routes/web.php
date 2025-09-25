@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Firmwares
     Route::get('/firmwares', [DashboardController::class, 'showFirmwares'])->name('firmwares');
+    Route::post('/firmwares', [DashboardController::class, 'storeFirmware'])->name('firmwares.store');
 });
 
 
