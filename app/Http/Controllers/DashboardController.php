@@ -19,6 +19,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        $aprroved_rent = Auth::user()->approved_rent;
         $messages = Auth::user()->messages()->latest()->paginate(5);
         $current_credits = Auth::user()->sms_credits;
         $isrent = Auth::user()->isrent;
