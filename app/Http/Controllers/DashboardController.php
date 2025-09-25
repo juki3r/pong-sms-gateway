@@ -184,7 +184,7 @@ class DashboardController extends Controller
             'name' => $request->name,
             'firmware_version' => $request->firmware_version,
             'ota_key' => $request->ota_key,
-            'file_path' => $filePath, // store path in DB
+            'file_path' => 'haha', // store path in DB
         ]);
 
         return $filePath;
