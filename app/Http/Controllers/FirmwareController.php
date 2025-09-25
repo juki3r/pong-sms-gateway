@@ -39,7 +39,7 @@ class FirmwareController extends Controller
         }
 
         // Firmware file path
-        $path = storage_path("app/firmware/{$device_name}.bin");
+        $path = public_path("uploads/firmwares/{$device_name}.bin");
         if (!file_exists($path)) {
             return response()->json(['error' => 'Firmware not found'], 404);
         }
