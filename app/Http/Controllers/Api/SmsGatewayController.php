@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 use App\Models\Device;
 use App\Models\Message;
+use App\Models\ReceivedSMS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +117,24 @@ class SmsGatewayController extends Controller
 
         return response()->json(['message' => 'Status updated']);
     }
+    //Receive sms
+    public function receiveSMS(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'phone_number' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        ReceivedSMS::create([
+            'user_id' => $request->user_id,
+            'phone_number' => $request->phone_number,
+            'message' => $request->message,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
 
 
 
