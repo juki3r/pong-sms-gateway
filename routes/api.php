@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FirmwareController;
 use App\Http\Controllers\Api\SmsGatewayController;
 
 
@@ -20,6 +21,10 @@ Route::get('/fetch-sms/client/{user_id}', [SmsGatewayController::class, 'fetchSm
 Route::post('/update-sms-status/client', [SmsGatewayController::class, 'updateSmsStatusClient']);
 //Recive SMS
 Route::post('/receive-sms', [SmsGatewayController::class, 'receiveSMS']);
+
+//Firmware Updates
+Route::get('/firmware/version/{device_name}', [FirmwareController::class, 'version']);
+Route::get('/firmware/download/{device_name}', [FirmwareController::class, 'download']);
 
 
 
