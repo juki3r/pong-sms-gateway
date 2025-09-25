@@ -52,11 +52,20 @@ class DashboardController extends Controller
             return redirect('dashboard')->with('alert', 'Not enough credits, Rent sim card now to continue!');
         }
 
-        $user->messages()->create([
-            'phone_number' => $request->recipient,
-            'message' => $request->message,
-            'status' => 'pending',
-        ]);
+        if ($user->approved_rent == true) {
+            $user->messages()->create([
+                'phone_number' => $request->recipient,
+                'message' => $request->message,
+                'status' => 'pending',
+                'demo'  => false,
+            ]);
+        } else {
+            $user->messages()->create([
+                'phone_number' => $request->recipient,
+                'message' => $request->message,
+                'status' => 'pending',
+            ]);
+        }
 
         $user->decrement('sms_credits');
 
