@@ -278,7 +278,7 @@
                                             <th>Time</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="received-sms-body">
                                         @forelse($received_sms as $index => $sms)
                                             <tr id="sms-{{ $sms->id }}">
                                                 <td>{{ $received_sms->firstItem() + $index }}</td>
@@ -291,9 +291,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center text-muted">
-                                                    No received messages found.
-                                                </td>
+                                                <td colspan="5" class="text-center text-muted">No received messages found.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -304,6 +302,58 @@
                                         {{ $received_sms->links('pagination::bootstrap-5') }}
                                     </div>
                                 </div>
+                                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                                    <script>
+                                    let currentPage = 1;
+
+                                    function refreshReceivedSms(page = 1) {
+                                        axios.get('{{ route("receivedSms.fetch") }}?page=' + page)
+                                            .then(response => {
+                                                const tbody = document.getElementById('received-sms-body');
+                                                tbody.innerHTML = '';
+
+                                                if (response.data.data.length > 0) {
+                                                    response.data.data.forEach((sms, index) => {
+                                                        tbody.innerHTML += `
+                                                            <tr id="sms-${sms.id}">
+                                                                <td>${response.data.from + index}</td>
+                                                                <td>${sms.from ?? 'Unknown'}</td>
+                                                                <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
+                                                                    ${sms.message}
+                                                                </td>
+                                                                <td>${new Date(sms.created_at).toLocaleDateString()}</td>
+                                                                <td>${new Date(sms.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+                                                            </tr>
+                                                        `;
+                                                    });
+                                                } else {
+                                                    tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No received messages found.</td></tr>`;
+                                                }
+
+                                                // Update pagination links dynamically
+                                                document.getElementById('received-sms-pagination').innerHTML = response.data.links
+                                                    .map(link => {
+                                                        return `<button class="btn btn-sm ${link.active ? 'btn-primary' : 'btn-light'} mx-1"
+                                                                onclick="changePage('${link.url}')"
+                                                                ${link.url === null ? 'disabled' : ''}>
+                                                                ${link.label.replace('&laquo;', '«').replace('&raquo;', '»')}
+                                                            </button>`;
+                                                    }).join('');
+                                            })
+                                            .catch(err => console.error(err));
+                                    }
+
+                                    function changePage(url) {
+                                        if (!url) return;
+                                        const urlParams = new URL(url).searchParams;
+                                        currentPage = urlParams.get('page') || 1;
+                                        refreshReceivedSms(currentPage);
+                                    }
+
+                                    // Auto-refresh every 5 seconds, staying on the same page
+                                    setInterval(() => refreshReceivedSms(currentPage), 5000);
+                                    </script>
+
                             </div>
                         </div>
                     </div>

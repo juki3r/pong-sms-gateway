@@ -42,6 +42,20 @@ class DashboardController extends Controller
         ));
     }
 
+    // Always fetch Received if there is new
+    public function fetchReceivedSms(Request $request)
+    {
+        $perPage = 10; // how many per page
+        $page = $request->get('page', 1);
+
+        $received_sms = ReceivedSMS::where('user_id', Auth::id())
+            ->latest()
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json($received_sms);
+    }
+
+
     public function status()
     {
         // Only current user's messages

@@ -16,6 +16,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/messages/status', [DashboardController::class, 'status'])->name('messages.status');
+    //Fetch received sms always
+    Route::get('/received-sms/fetch', [DashboardController::class, 'fetchReceivedSms'])
+        ->name('receivedSms.fetch');
+
 
     Route::post('/send/message', [DashboardController::class, 'sendSms'])->name('sendSms');
 
