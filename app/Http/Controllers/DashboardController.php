@@ -157,26 +157,32 @@ class DashboardController extends Controller
     // Add Firmware
     public function storeFirmware(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'firmware_version' => 'required|string|max:50',
-        //     'ota_key' => 'required|string|max:100',
-        //     'file_path' => 'required|file|mimes:bin,hex',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'firmware_version' => 'required|string|max:50',
+            'ota_key' => 'required|string|max:100',
+            'file_path' => 'required|file|mimes:bin,hex',
+        ]);
 
-        // // Upload firmware file
-        // $filePath = $request->file('file_path')->store('uploads/firmwares', 'public');
+        // Upload firmware file directly to public/uploads/firmwares
+        $file = $request->file('file_path');
+        $filename = $file->getClientOriginalName(); // keep original name
+        $file->move(public_path('uploads/firmwares'), $filename);
 
-        // Espdevice::create([
-        //     'name' => $request->name,
-        //     'firmware_version' => $request->firmware_version,
-        //     'ota_key' => $request->ota_key,
-        //     'file_path' => $filePath,
-        // ]);
+        // File path to store in DB
+        $filePath = 'uploads/firmwares/' . $filename;
 
-        // return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
-        echo "hello";
+        // Create firmware record
+        Espdevice::create([
+            'name' => $request->name,
+            'firmware_version' => $request->firmware_version,
+            'ota_key' => $request->ota_key,
+            'file_path' => $filePath,
+        ]);
+
+        return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
     }
+
 
 
 
