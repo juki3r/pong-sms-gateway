@@ -160,30 +160,32 @@ class DashboardController extends Controller
 
     public function storeFirmware(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|string|max:255',
-        //     'firmware_version' => 'required|string|max:50',
-        //     'ota_key' => 'required|string|max:100',
-        //     'file_path' => 'required|file', // required
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'firmware_version' => 'required|string|max:50',
+            'ota_key' => 'required|string|max:100',
+            'file_path' => 'required|file', // required
+        ]);
 
-        return $request->file_path;
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'errors' => $validator->errors()
-        //     ], 422);
-        // }
 
-        // $file = $request->file('file_path');
-        // $extension = strtolower($file->getClientOriginalExtension());
-        // if (!in_array($extension, ['bin', 'hex'])) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
-        //     ], 422);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $file = $request->file('file_path');
+        $extension = strtolower($file->getClientOriginalExtension());
+        if (!in_array($extension, ['bin', 'hex'])) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
+            ], 422);
+        }
+
+        return $file;
 
         // // Use Laravel's store method (public disk)
         // $filePath = $file->store('uploads/firmwares', 'public');
