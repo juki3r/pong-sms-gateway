@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RentSimAcknowledgmentMail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
@@ -155,34 +156,40 @@ class DashboardController extends Controller
     }
 
     // Add Firmware
+
+
     public function storeFirmware(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'firmware_version' => 'required|string|max:50',
             'ota_key' => 'required|string|max:100',
             'file_path' => 'nullable|file|mimes:bin,hex',
         ]);
 
-        // Upload firmware file directly to public/uploads/firmwares
-        // $file = $request->file('file_path');
-        // $filename = $file->getClientOriginalName(); // keep original name
-        // $file->move(public_path('uploads/firmwares'), $filename);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        // // File path to store in DB
-        // $filePath = 'uploads/firmwares/' . $filename;
+        $filePath = null;
+        if ($request->hasFile('file_path')) {
+            $file = $request->file('file_path');
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('uploads/firmwares'), $filename);
+            $filePath = 'uploads/firmwares/' . $filename;
+        }
 
-        // // Create firmware record
-        // Espdevice::create([
-        //     'name' => $request->name,
-        //     'firmware_version' => $request->firmware_version,
-        //     'ota_key' => $request->ota_key,
-        //     'file_path' => $filePath,
-        // ]);
+        Espdevice::create([
+            'name' => $request->name,
+            'firmware_version' => $request->firmware_version,
+            'ota_key' => $request->ota_key,
+            'file_path' => $filePath,
+        ]);
 
-        // return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
-
-        return $request->name;
+        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
     }
 
 
