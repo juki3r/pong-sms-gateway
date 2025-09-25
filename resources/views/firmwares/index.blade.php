@@ -40,8 +40,8 @@
                                         <td>{{ $firmware->ota_key }}</td>
                                         <td>{{ $firmware->file_path }}</td>
                                         <td>
-                                            <a href="{{ route('firmwares.edit', $firmware->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                            <form action="{{ route('firmwares.destroy', $firmware->id) }}" method="POST" style="display:inline-block;">
+                                            <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                            <form action="" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
