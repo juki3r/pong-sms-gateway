@@ -177,7 +177,7 @@ class DashboardController extends Controller
             'name' => $request->name,
             'firmware_version' => $request->firmware_version,
             'ota_key' => $request->ota_key,
-            'file_path' => $filePath,
+            // 'file_path' => $filePath,
         ]);
 
         return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
