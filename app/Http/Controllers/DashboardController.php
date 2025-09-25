@@ -197,7 +197,7 @@ class DashboardController extends Controller
 
         $firmware->delete();
 
-        return redirect()->route('firmwares.index')->with('success', 'Firmware deleted successfully.');
+        return redirect()->route('firmwares.index')->with('status', 'Firmware deleted successfully.');
     }
 
 
