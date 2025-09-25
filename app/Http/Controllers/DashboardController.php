@@ -165,22 +165,24 @@ class DashboardController extends Controller
         ]);
 
         // Upload firmware file directly to public/uploads/firmwares
-        $file = $request->file('file_path');
-        $filename = $file->getClientOriginalName(); // keep original name
-        $file->move(public_path('uploads/firmwares'), $filename);
+        // $file = $request->file('file_path');
+        // $filename = $file->getClientOriginalName(); // keep original name
+        // $file->move(public_path('uploads/firmwares'), $filename);
 
-        // File path to store in DB
-        $filePath = 'uploads/firmwares/' . $filename;
+        // // File path to store in DB
+        // $filePath = 'uploads/firmwares/' . $filename;
 
-        // Create firmware record
-        Espdevice::create([
-            'name' => $request->name,
-            'firmware_version' => $request->firmware_version,
-            'ota_key' => $request->ota_key,
-            // 'file_path' => $filePath,
-        ]);
+        // // Create firmware record
+        // Espdevice::create([
+        //     'name' => $request->name,
+        //     'firmware_version' => $request->firmware_version,
+        //     'ota_key' => $request->ota_key,
+        //     'file_path' => $filePath,
+        // ]);
 
-        return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
+        // return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
+
+        return ([$request->name, $request->firmware_version, $request->ota_key,]);
     }
 
 
