@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $current_credits = Auth::user()->sms_credits;
         $isrent = Auth::user()->isrent;
         $data = Message::paginate(5); // or any model
-        return view('dashboard', compact(['messages', 'current_credits', 'data', 'isrent']));
+        return view('dashboard', compact(['messages', 'current_credits', 'data', 'isrent', 'aprroved_rent']));
     }
 
     public function status()
