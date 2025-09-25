@@ -188,7 +188,7 @@ class DashboardController extends Controller
         ]);
 
 
-        return redirect()->route('dashboard')->with(
+        return redirect()->route('firmwares.index')->with(
             'status',
             'Firmware added/updated'
         );

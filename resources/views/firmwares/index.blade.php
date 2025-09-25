@@ -10,7 +10,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
 
+                    @elseif(session('alert'))
+                        <div class="alert alert-danger">
+                            {{ session('alert') }}
+                        </div>
+                    @endif
+
+
+                    
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-4">
                             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Firmwares') }}</h2>
