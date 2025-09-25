@@ -164,7 +164,7 @@ class DashboardController extends Controller
             'name' => 'required|string|max:255',
             'firmware_version' => 'required|string|max:50',
             'ota_key' => 'required|string|max:100',
-            'file_path' => 'nullable|file|mimes:bin,hex',
+            'file_path' => 'nullable|file',
         ]);
 
         if ($validator->fails()) {
