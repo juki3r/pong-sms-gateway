@@ -185,6 +185,22 @@ class DashboardController extends Controller
         );
     }
 
+    //Delete firmware
+    public function destroyFirmware($id)
+    {
+        $firmware = Espdevice::findOrFail($id);
+
+        // Delete the file from public folder
+        if ($firmware->file_path && file_exists(public_path($firmware->file_path))) {
+            unlink(public_path($firmware->file_path));
+        }
+
+        $firmware->delete();
+
+        return redirect()->route('firmwares.index')->with('success', 'Firmware deleted successfully.');
+    }
+
+
 
 
 

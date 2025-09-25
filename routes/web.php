@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Firmwares
     Route::get('/firmwares', [DashboardController::class, 'showFirmwares'])->name('firmwares');
     Route::post('/firmwares/add', [DashboardController::class, 'storeFirmware'])->name('firmwares.store');
+    Route::delete('/firmwares/{id}', [DashboardController::class, 'destroyFirmware'])->name('firmwares.destroy');
 });
 
 
