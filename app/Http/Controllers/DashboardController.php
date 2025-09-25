@@ -177,27 +177,17 @@ class DashboardController extends Controller
         }
 
         $file = $request->file('file_path');
-        $extension = strtolower($file->getClientOriginalExtension());
-        if (!in_array($extension, ['bin', 'hex'])) {
-            return response()->json([
-                'status' => 'error',
-                'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
-            ], 422);
-        }
+        $filename = $file->getClientOriginalName(); // keep original name
+        $filePath = $file->storeAs('uploads/firmwares', $filename, 'public'); // saved in storage/app/public/uploads/firmwares
 
-        return $file;
+        Espdevice::create([
+            'name' => $request->name,
+            'firmware_version' => $request->firmware_version,
+            'ota_key' => $request->ota_key,
+            'file_path' => $filePath, // store path in DB
+        ]);
 
-        // // Use Laravel's store method (public disk)
-        // $filePath = $file->store('uploads/firmwares', 'public');
-
-        // Espdevice::create([
-        //     'name' => $request->name,
-        //     'firmware_version' => $request->firmware_version,
-        //     'ota_key' => $request->ota_key,
-        //     'file_path' => $filePath,
-        // ]);
-
-        // return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
+        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
     }
 
 
