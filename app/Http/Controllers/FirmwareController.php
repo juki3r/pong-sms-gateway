@@ -33,21 +33,17 @@ class FirmwareController extends Controller
     public function download(Request $request, $device_name)
     {
         $device = Espdevice::where('name', $device_name)->first();
-        if (!$device) {
-            return response()->json(['error' => 'Device not found'], 404);
-        }
+        if (!$device) return response()->json(['error' => 'Device not found'], 404);
 
-        // Check OTA key
-        if ($request->header('X-API-KEY') !== $device->ota_key) {
+        if ($request->header('X-API-KEY') !== $device->ota_key)
             return response()->json(['error' => 'Unauthorized'], 401);
-        }
 
-        // Firmware file path
         $path = public_path("uploads/firmwares/{$device_name}.bin");
-        if (!file_exists($path)) {
-            return response()->json(['error' => 'Firmware not found'], 404);
-        }
+        if (!file_exists($path)) return response()->json(['error' => 'Firmware not found'], 404);
 
-        return response()->download($path, "{$device_name}.bin");
+        return response()->file($path, [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Disposition' => 'inline; filename="' . $device_name . '.bin"'
+        ]);
     }
 }
