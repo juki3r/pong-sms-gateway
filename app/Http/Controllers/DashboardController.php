@@ -187,7 +187,9 @@ class DashboardController extends Controller
             'file_path' => $filePath, // store path in DB
         ]);
 
-        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
+        return $filePath;
+
+        // return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
     }
 
 
