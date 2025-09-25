@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RentSimAcknowledgmentMail;
+use App\Models\ReceivedSMS;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,10 +25,21 @@ class DashboardController extends Controller
         $current_credits = Auth::user()->sms_credits;
         $isrent = Auth::user()->isrent;
 
+        $received_sms = ReceivedSMS::where('user_id', Auth::id())
+            ->latest()
+            ->paginate(5);
+
         // Only include $data if you really need all messages
         $data = Message::paginate(5);
 
-        return view('dashboard', compact('messages', 'current_credits', 'data', 'isrent', 'approved_rent'));
+        return view('dashboard', compact(
+            'messages',
+            'current_credits',
+            'data',
+            'isrent',
+            'approved_rent',
+            'received_sms'
+        ));
     }
 
     public function status()
