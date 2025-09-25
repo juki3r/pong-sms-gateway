@@ -17,13 +17,16 @@ class FirmwareController extends Controller
             return response()->json(['error' => 'Device not found'], 404);
         }
 
-        // Check OTA key
-        if ($request->header('X-API-KEY') !== $device->ota_key) {
+        // Check OTA key from header or query param
+        $key = $request->header('X-API-KEY') ?? $request->query('api_key');
+
+        if ($key !== $device->ota_key) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return response()->json(['version' => $device->firmware_version]);
     }
+
 
     // Download firmware
     public function download(Request $request, $device_name)
