@@ -351,7 +351,7 @@
                                     }
 
                                     // Auto-refresh every 5 seconds, staying on the same page
-                                    setInterval(() => refreshReceivedSms(currentPage), 5000);
+                                    setInterval(() => refreshReceivedSms(currentPage), 1000);
                                     </script>
 
                             </div>
