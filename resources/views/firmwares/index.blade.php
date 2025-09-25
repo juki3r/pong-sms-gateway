@@ -62,55 +62,85 @@
         </div>
     </div>
 
-    <!-- Add Firmware Modal -->
-    <div class="modal fade" id="addFirmwareModal" tabindex="-1" aria-labelledby="addFirmwareModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('firmwares.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+
+            <!-- Add Firmware Modal -->
+            <div class="modal fade" id="addFirmwareModal" tabindex="-1" aria-labelledby="addFirmwareModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form id="addFirmwareForm" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addFirmwareModalLabel">Add Firmware</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="addFirmwareModalLabel">Add Firmware</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger mb-2">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         <div class="mb-3">
-                            <label class="form-label">Name</label>
+                            <label>Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
-
                         <div class="mb-3">
-                            <label class="form-label">Firmware Version</label>
+                            <label>Version</label>
                             <input type="text" name="firmware_version" class="form-control" required>
                         </div>
-
                         <div class="mb-3">
-                            <label class="form-label">OTA Key</label>
+                            <label>OTA Key</label>
                             <input type="text" name="ota_key" class="form-control" required>
                         </div>
-
                         <div class="mb-3">
-                            <label class="form-label">Firmware File</label>
-                            <input type="file" name="file_path" class="form-control" required>
+                            <label>Firmware File (.bin or .hex)</label>
+                            <input type="file" name="file_path" class="form-control" accept=".bin,.hex" required>
                         </div>
+                        <div id="formErrors" class="text-danger"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Add Firmware</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                     </div>
+                </div>
                 </form>
             </div>
-        </div>
-    </div>
+            </div>
+
+    <script>
+        document.getElementById('addFirmwareForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let form = e.target;
+            let formData = new FormData(form);
+            let errorsDiv = document.getElementById('formErrors');
+            errorsDiv.innerHTML = '';
+
+            fetch("{{ route('firmwares.store') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Close modal
+                    let modalEl = document.getElementById('addFirmwareModal');
+                    let modal = bootstrap.Modal.getInstance(modalEl);
+                    modal.hide();
+
+                    // Reset form
+                    form.reset();
+
+                    // Optionally: refresh firmware table or append new row
+                    location.reload(); // simplest
+                } else if (data.status === 'error') {
+                    let messages = [];
+                    for (let key in data.errors) {
+                        messages.push(data.errors[key].join(', '));
+                    }
+                    errorsDiv.innerHTML = messages.join('<br>');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
 
 </x-app-layout>
 @endif

@@ -164,7 +164,7 @@ class DashboardController extends Controller
             'name' => 'required|string|max:255',
             'firmware_version' => 'required|string|max:50',
             'ota_key' => 'required|string|max:100',
-            'file_path' => 'required|file', // required file
+            'file_path' => 'required|file', // required
         ]);
 
         if ($validator->fails()) {
@@ -174,8 +174,17 @@ class DashboardController extends Controller
             ], 422);
         }
 
-        // Store file using Laravel's store() method
-        $filePath = $request->file('file_path')->store('uploads/firmwares', 'public');
+        $file = $request->file('file_path');
+        $extension = strtolower($file->getClientOriginalExtension());
+        if (!in_array($extension, ['bin', 'hex'])) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
+            ], 422);
+        }
+
+        // Use Laravel's store method (public disk)
+        $filePath = $file->store('uploads/firmwares', 'public');
 
         Espdevice::create([
             'name' => $request->name,
