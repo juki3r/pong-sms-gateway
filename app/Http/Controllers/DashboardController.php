@@ -145,6 +145,13 @@ class DashboardController extends Controller
     }
 
 
+    //Firmwares
+    public function showFirmwares()
+    {
+        return view('firmwares.index');
+    }
+
+
 
 
 
