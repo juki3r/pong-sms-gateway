@@ -74,7 +74,7 @@ class SmsGatewayController extends Controller
             'response' => 'nullable|string',
         ]);
 
-        $msg = Message::find($request->id);
+        $msg = Message::find($request->id)->where('demo', true);
         $user = $msg->user; // Assuming Message model has a 'user' relationship
 
         // Update status and response
