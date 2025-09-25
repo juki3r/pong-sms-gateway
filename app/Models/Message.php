@@ -13,6 +13,7 @@ class Message extends Model
         'status',
         'response',
         'refunded',
+        'demo',
     ];
 
     public function user()

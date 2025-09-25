@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SmsGatewayController extends Controller
 {
-    // ESP32 fetches the oldest pending message
+    // ESP32 fetches the oldest pending message. This is for Demo mode
     public function fetchSms()
     {
         $message = Message::where('status', 'pending')->orderBy('created_at')->first();
