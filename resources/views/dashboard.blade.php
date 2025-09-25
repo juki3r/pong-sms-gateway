@@ -282,7 +282,7 @@
                                         @forelse($received_sms as $index => $sms)
                                             <tr id="sms-{{ $sms->id }}">
                                                 <td>{{ $received_sms->firstItem() + $index }}</td>
-                                                <td>{{ $sms->from ?? 'Unknown' }}</td>
+                                                <td>{{ $sms->phone_number ?? 'Unknown' }}</td>
                                                 <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
                                                     {{ $sms->message }}
                                                 </td>
