@@ -117,7 +117,7 @@ class SmsGatewayController extends Controller
 
         return response()->json(['message' => 'Status updated']);
     }
-    //Receive sms
+    //Receive sms for clients
     public function receiveSMS(Request $request)
     {
         $request->validate([
