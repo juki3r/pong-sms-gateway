@@ -317,7 +317,7 @@
                                                         tbody.innerHTML += `
                                                             <tr id="sms-${sms.id}">
                                                                 <td>${response.data.from + index}</td>
-                                                                <td>${sms.from ?? 'Unknown'}</td>
+                                                                <td>${sms.phone_number ?? 'Unknown'}</td>
                                                                 <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
                                                                     ${sms.message}
                                                                 </td>
