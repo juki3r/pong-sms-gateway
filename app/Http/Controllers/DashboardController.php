@@ -180,7 +180,7 @@ class DashboardController extends Controller
         $filename = $file->getClientOriginalName(); // keep original name
         $filePath = $file->storeAs('uploads/firmwares', $filename, 'public'); // saved in storage/app/public/uploads/firmwares
 
-        Espdevice::create([
+        Espdevice::updateOrCreate([
             'name' => $request->name,
             'firmware_version' => $request->firmware_version,
             'ota_key' => $request->ota_key,
@@ -188,7 +188,10 @@ class DashboardController extends Controller
         ]);
 
 
-        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
+        return redirect()->route('dashboard')->with(
+            'status',
+            'Firmware added/updated'
+        );
     }
 
 
