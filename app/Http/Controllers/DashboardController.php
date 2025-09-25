@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Device;
 use App\Models\Message;
+use App\Models\Espdevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Mail\RentSimAcknowledgmentMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\RentSimAcknowledgmentMail;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -148,8 +149,11 @@ class DashboardController extends Controller
     //Firmwares
     public function showFirmwares()
     {
-        return view('firmwares.index');
+        $firmwares = Espdevice::all(); // same as get()
+
+        return view('firmwares.index', compact('firmwares'));
     }
+
 
 
 
