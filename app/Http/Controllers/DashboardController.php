@@ -167,15 +167,6 @@ class DashboardController extends Controller
             'file_path' => 'required|file', // required
         ]);
 
-
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
         $file = $request->file('file_path');
         $filename = $file->getClientOriginalName(); // keep original name
         $filePath = $file->storeAs('uploads/firmwares', $filename, 'public'); // saved in storage/app/public/uploads/firmwares
