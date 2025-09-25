@@ -27,6 +27,26 @@ class SmsGatewayController extends Controller
         ]);
     }
 
+    // ESP32 fetches the oldest pending message. This is for Client
+    public function fetchSmsClient($id)
+    {
+        $message = Message::where('status', 'pending')
+            ->where('demo', false)
+            ->where('user_id', $id)
+            ->orderBy('created_at')
+            ->first();
+
+        if (!$message) {
+            return response()->json(['status' => 'no_pending'], 200);
+        }
+
+        return response()->json([
+            'id' => $message->id,
+            'phone_number' => $message->phone_number,
+            'message' => $message->message
+        ]);
+    }
+
 
 
     // // ESP32 posts back status

@@ -10,7 +10,13 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/send-sms-api', [SmsGatewayController::class, 'sendSmsAPI']);
+
+//Demo
 Route::get('/fetch-sms', [SmsGatewayController::class, 'fetchSms']);
+//Client
+Route::get('/fetch-sms/client/{id}', [SmsGatewayController::class, 'fetchSmsClient']);
+
+
 Route::post('/update-sms-status', [SmsGatewayController::class, 'updateSmsStatus']);
 Route::post('/ping', [SmsGatewayController::class, 'ping']);
 
