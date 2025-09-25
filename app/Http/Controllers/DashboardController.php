@@ -182,7 +182,7 @@ class DashboardController extends Controller
 
         // return redirect()->route('firmwares.index')->with('success', 'Firmware added successfully.');
 
-        return ($request->name);
+        echo $request->name;
     }
 
 
