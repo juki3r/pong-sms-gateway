@@ -164,10 +164,8 @@ class DashboardController extends Controller
             'name' => 'required|string|max:255',
             'firmware_version' => 'required|string|max:50',
             'ota_key' => 'required|string|max:100',
-            'file_path' => 'required|file', // required
+            'file_path' => 'required|file', // must upload
         ]);
-
-
 
         if ($validator->fails()) {
             return response()->json([
@@ -177,17 +175,35 @@ class DashboardController extends Controller
         }
 
         $file = $request->file('file_path');
-        $filename = $file->getClientOriginalName(); // keep original name
-        $filePath = $file->storeAs('uploads/firmwares', $filename, 'public'); // saved in storage/app/public/uploads/firmwares
+        $extension = strtolower($file->getClientOriginalExtension());
 
-        Espdevice::create([
+        if (!in_array($extension, ['bin', 'hex'])) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => ['file_path' => ['Only .bin or .hex files are allowed.']]
+            ], 422);
+        }
+
+        // Move file directly to public/uploads/firmwares
+        $filename = $file->getClientOriginalName(); // keep original name
+        $destination = public_path('uploads/firmwares');
+        $file->move($destination, $filename);
+
+        $filePath = 'uploads/firmwares/' . $filename; // this is the path to store in DB
+
+        // Save record in DB
+        $firmware = Espdevice::create([
             'name' => $request->name,
             'firmware_version' => $request->firmware_version,
             'ota_key' => $request->ota_key,
-            'file_path' => $filePath, // store path in DB
+            'file_path' => $filePath, // <-- this MUST match your DB column
         ]);
 
-        return response()->json(['status' => 'success', 'message' => 'Firmware added successfully']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Firmware added successfully',
+            'data' => $firmware
+        ]);
     }
 
 
