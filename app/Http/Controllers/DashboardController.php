@@ -157,12 +157,12 @@ class DashboardController extends Controller
     // Add Firmware
     public function storeFirmware(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'firmware_version' => 'required|string|max:50',
-        //     'ota_key' => 'required|string|max:100',
-        //     'file_path' => 'nullable|file|mimes:bin,hex',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'firmware_version' => 'required|string|max:50',
+            'ota_key' => 'required|string|max:100',
+            'file_path' => 'nullable|file|mimes:bin,hex',
+        ]);
 
         // Upload firmware file directly to public/uploads/firmwares
         // $file = $request->file('file_path');
