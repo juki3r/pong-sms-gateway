@@ -14,7 +14,7 @@ class SmsGatewayController extends Controller
     // ESP32 fetches the oldest pending message. This is for Demo mode
     public function fetchSms()
     {
-        $message = Message::where('status', 'pending')->orderBy('created_at')->first();
+        $message = Message::where('status', 'pending')->where('demo', true)->orderBy('created_at')->first();
 
         if (!$message) {
             return response()->json(['status' => 'no_pending'], 200);
