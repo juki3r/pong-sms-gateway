@@ -267,7 +267,7 @@
                             </h3>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover" style="font-size: clamp(0.75rem, 1vw, 1rem);">
+                                <table class="table table-bordered table-hover table-striped" style="font-size: clamp(0.75rem, 1vw, 1rem);">
                                     <thead class="table-light">
                                         <tr>
                                             <th>#</th>
