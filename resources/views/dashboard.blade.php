@@ -357,7 +357,7 @@
                             </div>
                         </div>
                     </div>
-                    @elif
+                    @endif
 
                     {{-- SEND SMS MODAL --}}
                     <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
