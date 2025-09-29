@@ -251,6 +251,7 @@
                     </div>
 
                 {{-- SMS HISTORY RECEIVED --}}
+                @if(Auth::user()->approved_rent == true)
                     <div class="row mt-5">
                         <div class="responsive-table col-12">
                             <h3 class="py-3 fs-6 d-flex justify-content-between">
@@ -356,7 +357,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @elseif
 
                     {{-- SEND SMS MODAL --}}
                     <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
