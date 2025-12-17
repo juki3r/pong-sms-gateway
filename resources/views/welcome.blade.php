@@ -39,7 +39,7 @@
     <p class="lead mb-4">
       Rent SIM cards, send SMS, and integrate messaging seamlessly—optimized for websites, mobile platforms, and fintech like GCash & PayMaya.
     </p>
-    <div>
+    <div class="d-flex flex-column flex-md-row">
       <a href="#features" class="btn btn-light btn-lg me-2 mb-md-0 mb-3 ">Explore Features</a>
       <a href="{{route('login')}}" class="btn btn-outline-light btn-lg">Get Started</a>
     </div>
