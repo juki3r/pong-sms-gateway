@@ -66,7 +66,7 @@ class SmsGatewayController extends Controller
     public function fetchSmsClient($user_id)
     {
         $message = Message::where('status', 'pending')
-            ->where('demo', true)
+            ->where('demo', false)
             ->where('user_id', $user_id)
             ->orderBy('created_at')
             ->first();

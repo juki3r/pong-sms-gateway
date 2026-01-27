@@ -87,7 +87,7 @@ class DashboardController extends Controller
                 'phone_number' => $request->recipient,
                 'message' => $request->message,
                 'status' => 'pending',
-                'demo'  => true,
+                'demo'  => false,
             ]);
         } else {
             $user->messages()->create([
