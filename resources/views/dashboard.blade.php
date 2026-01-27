@@ -12,8 +12,6 @@
                 <div class="p-6 text-gray-900">
             
                     Hello admin
-
-
                 </div>
             </div>
         </div>
