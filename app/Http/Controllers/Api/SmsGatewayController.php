@@ -94,7 +94,7 @@ class SmsGatewayController extends Controller
 
         $msg = Message::where('id', $request->id)
             ->where('user_id', $request->user_id)
-            ->where('demo', false)
+            ->where('demo', true)
             ->firstOrFail();
 
         $user = $msg->user; // Assuming Message model has a 'user' relationship
