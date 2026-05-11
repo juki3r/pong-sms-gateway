@@ -27,12 +27,61 @@ class SmsGatewayController extends Controller
             'message' => $message->message
         ]);
     }
+
+    //1st back up
+    public function fetchSms_backup()
+    {
+        $message = Message::where('status', 'failed')->where('demo', true)->orderBy('created_at')->first();
+
+        if (!$message) {
+            return response()->json(['status' => 'no_failed'], 200);
+        }
+
+        return response()->json([
+            'id' => $message->id,
+            'phone_number' => $message->phone_number,
+            'message' => $message->message
+        ]);
+    }
     // ESP32 Update status. This is for Demo mode
     public function updateSmsStatus(Request $request)
     {
         $request->validate([
             'id' => 'required|integer|exists:messages,id',
             'status' => 'required|in:sent,failed',
+            'response' => 'nullable|string',
+        ]);
+
+        $msg = Message::where('id', $request->id)
+            ->where('demo', true)
+            ->firstOrFail();
+
+        $user = $msg->user; // Assuming Message model has a 'user' relationship
+
+        // Update status and response
+        $msg->status = $request->status;
+        $msg->response = $request->response ?? '';
+        $msg->save();
+
+        // Refund credit if failed
+        if ($request->status === 'failed') {
+            $user->increment('sms_credits');
+
+            // Update all failed messages of this user that haven't been refunded yet
+            \App\Models\Message::where('user_id', $user->id)
+                ->where('status', 'failed')
+                ->where('refunded', false)
+                ->update(['refunded' => true]);
+        }
+
+        return response()->json(['message' => 'Status updated']);
+    }
+
+    public function updateSmsStatus_backup(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:messages,id',
+            'status' => 'required|in:sent,failed1',
             'response' => 'nullable|string',
         ]);
 

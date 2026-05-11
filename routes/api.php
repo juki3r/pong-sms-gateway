@@ -16,6 +16,11 @@ Route::post('/send-sms-api', [SmsGatewayController::class, 'sendSmsAPI']);
 Route::get('/fetch-sms', [SmsGatewayController::class, 'fetchSms']);
 Route::post('/update-sms-status', [SmsGatewayController::class, 'updateSmsStatus']);
 
+
+//1st backup fetching failed messages to send again
+Route::get('/fetch-sms-backup', [SmsGatewayController::class, 'fetchSms_backup']);
+Route::post('/update-sms-status-backup', [SmsGatewayController::class, 'updateSmsStatus_backup']);
+
 //Client
 Route::get('/fetch-sms/client/{user_id}', [SmsGatewayController::class, 'fetchSmsClient']);
 Route::post('/update-sms-status/client', [SmsGatewayController::class, 'updateSmsStatusClient']);
