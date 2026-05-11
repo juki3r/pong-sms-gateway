@@ -96,15 +96,15 @@ class SmsGatewayController extends Controller
         $msg->save();
 
         // Refund 1 SMS credit if sending failed
-        if ($request->status === 'pending') {
-            $user = $msg->user;
+        // if ($request->status === 'pending') {
+        //     $user = $msg->user;
 
-            // Refund only once
-            if (!$msg->refunded) {
-                $user->increment('sms_credits');
-                $msg->update(['refunded' => true]);
-            }
-        }
+        //     // Refund only once
+        //     if (!$msg->refunded) {
+        //         $user->increment('sms_credits');
+        //         $msg->update(['refunded' => true]);
+        //     }
+        // }
 
         return response()->json([
             'success' => true,
