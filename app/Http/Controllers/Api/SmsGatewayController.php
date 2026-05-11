@@ -81,33 +81,36 @@ class SmsGatewayController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:messages,id',
-            'status' => 'required',
+            'status' => 'required|string',
             'response' => 'nullable|string',
         ]);
 
+        // Find only demo messages
         $msg = Message::where('id', $request->id)
             ->where('demo', true)
             ->firstOrFail();
 
-        $user = $msg->user; // Assuming Message model has a 'user' relationship
-
-        // Update status and response
+        // Update message status and response
         $msg->status = $request->status;
         $msg->response = $request->response ?? '';
         $msg->save();
 
-        // Refund credit if failed
-        // if ($request->status === 'pending') {
-        //     $user->increment('sms_credits');
+        // Refund 1 SMS credit if sending failed
+        if ($request->status === 'pending') {
+            $user = $msg->user;
 
-        //     // Update all failed messages of this user that haven't been refunded yet
-        //     \App\Models\Message::where('user_id', $user->id)
-        //         ->where('status', 'pending')
-        //         ->where('refunded', false)
-        //         ->update(['refunded' => true]);
-        // }
+            // Refund only once
+            if (!$msg->refunded) {
+                $user->increment('sms_credits');
+                $msg->update(['refunded' => true]);
+            }
+        }
 
-        return response()->json(['message' => 'Status updated']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully.',
+            'status' => $msg->status,
+        ]);
     }
 
 
