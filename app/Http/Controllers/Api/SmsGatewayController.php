@@ -97,12 +97,12 @@ class SmsGatewayController extends Controller
         $msg->save();
 
         // Refund credit if failed
-        if ($request->status === 'failed') {
+        if ($request->status === 'failed1') {
             $user->increment('sms_credits');
 
             // Update all failed messages of this user that haven't been refunded yet
             \App\Models\Message::where('user_id', $user->id)
-                ->where('status', 'failed')
+                ->where('status', 'failed1')
                 ->where('refunded', false)
                 ->update(['refunded' => true]);
         }
