@@ -32,7 +32,9 @@ Route::get('/firmware/version/{device_name}', [FirmwareController::class, 'versi
 Route::get('/firmware/download/{device_name}', [FirmwareController::class, 'download']);
 
 
-
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working']);
+});
 
 Route::post('/ping', [SmsGatewayController::class, 'ping']);
 
