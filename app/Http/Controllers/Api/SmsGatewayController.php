@@ -81,7 +81,7 @@ class SmsGatewayController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:messages,id',
-            'status' => 'required|in:sent,pending',
+            'status' => 'required',
             'response' => 'nullable|string',
         ]);
 
