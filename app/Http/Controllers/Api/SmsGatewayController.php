@@ -86,25 +86,15 @@ class SmsGatewayController extends Controller
         ]);
 
         // Find only demo messages
-        $msg = Message::where('id', $request->id)
-            ->where('demo', true)
-            ->firstOrFail();
+        // $msg = Message::where('id', $request->id)
+        //     ->where('demo', true)
+        //     ->firstOrFail();
+        $msg = Message::find($request->id);
 
         // Update message status and response
         $msg->status = $request->status;
         $msg->response = $request->response ?? '';
         $msg->save();
-
-        // Refund 1 SMS credit if sending failed
-        // if ($request->status === 'pending') {
-        //     $user = $msg->user;
-
-        //     // Refund only once
-        //     if (!$msg->refunded) {
-        //         $user->increment('sms_credits');
-        //         $msg->update(['refunded' => true]);
-        //     }
-        // }
 
         return response()->json([
             'success' => true,
